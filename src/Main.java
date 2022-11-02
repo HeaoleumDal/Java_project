@@ -1,30 +1,36 @@
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
-import javax.swing.plaf.synth.SynthSliderUI;
+
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("=============================================");
-        System.out.println("                     CHESS               ");
-        System.out.println("   ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓");
-        System.out.println("H  ┃ ♜  ┃ ♞  ┃ ♝  ┃ ♛  ┃ ♚  ┃ ♝  ┃ ♞  ┃ ♜  ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("G  ┃ ♟  ┃ ♟  ┃ ♟  ┃ ♟  ┃ ♟  ┃ ♟  ┃ ♟  ┃ ♟  ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("F  ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("E  ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("D  ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("C  ┃ ♙  ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("B  ┃ ♙  ┃ ♙  ┃ ♙  ┃ ♙  ┃ ♙  ┃ ♙  ┃ ♙  ┃ ♙  ┃");
-        System.out.println("   ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫");
-        System.out.println("A  ┃ ♖  ┃ ♘  ┃ ♗  ┃ ♕  ┃ ♔  ┃ ♗  ┃ ♘  ┃ ♖  ┃");
-        System.out.println("   ┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛");
-        System.out.println("      1    2    3    4    5    6    7    8");
-        System.out.println("=============================================");
-        
-
+    public static void main(String[] args) {   
+        StringBuffer board = new StringBuffer();
+        board.append("=============================================\n");
+        board.append("                     CHESS\n");
+        board.append("   ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓\n");
+        int j = 72;
+        for(int i = 0 ; i < 15 ; i++) 
+        {
+            if(i % 2 == 0)
+            {  
+                //65 ~ 72
+                while(j > 64)
+                {
+                    board.append((char)j);
+                    board.append("  ");
+                    board.append("┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃\n");
+                    j--;
+                    break;
+                }
+            }
+            else if(i % 2 != 0)
+            {
+                board.append("   ");
+                board.append("┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫\n");
+                //break;
+            }
+        }
+        board.append("   ┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛\n");
+        board.append("      1    2    3    4    5    6    7    8\n");
+        board.append("=============================================\n");
+        System.out.println(board);
     }
 }
