@@ -1,9 +1,10 @@
 package game;
-import game.UI.BoardDrawing;
+import game.UI.uiDrawing;
 
 public class Main {
     public static void main(String[] args) {  
-        BoardDrawing newchess = new BoardDrawing();
-        newchess.DrawChessBoard();
+        uiDrawing gameStart = new uiDrawing();
+        gameStart.DrawUi();
+
     }
 }

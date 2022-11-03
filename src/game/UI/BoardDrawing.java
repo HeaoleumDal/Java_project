@@ -1,9 +1,10 @@
-package game.UI;
-import game.UI.chess;
+package game.UI;import game.UI.chess;
+
 public class BoardDrawing{
     chess chess = new chess();
     public void DrawChessBoard() {
         StringBuffer board = new StringBuffer();
+        board.append("\n");
         board.append("=============================================\n");
         board.append("                     CHESS\n");
         board.append("   ┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓\n");
