@@ -2,6 +2,7 @@ package game.UI;
 
 public class chess {
     public final String nullpiece = "    ";
+
     public final String WhitePawn = " ♙  ";
     public final String WhiteRook = " ♖  ";
     public final String WhiteKnight = " ♘  ";
@@ -16,10 +17,13 @@ public class chess {
     public final String BlackKing = " ♚  ";
     public final String BlackPawn = " ♟  ";
 
+    public final String[] WhitePiece = {WhitePawn, WhiteRook, WhiteKnight, WhiteBishop, WhiteQueen, WhiteKing};
+    public final String[] BlackPiece = {BlackPawn, BlackRook, BlackKnight, BlackBishop, BlackQueen, BlackKing};
+
     public String[][] chessboard =
     {
             { BlackRook, BlackKnight, BlackBishop, BlackQueen, BlackKing, BlackBishop, BlackKnight, BlackRook },
-            { BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn },
+            { BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn, BlackPawn },
             { nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece },
             { nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece },
             { nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece, nullpiece },
@@ -27,4 +31,9 @@ public class chess {
             { WhitePawn, WhitePawn, WhitePawn, WhitePawn, WhitePawn, WhitePawn, WhitePawn, WhitePawn },
             { WhiteRook, WhiteKnight, WhiteBishop, WhiteQueen, WhiteKing, WhiteBishop, WhiteKnight, WhiteRook }
     };
+
+    public void Print()
+    {
+        System.out.println(WhitePiece[1]);
+    }
 }
