@@ -3,7 +3,7 @@ import java.util.Scanner;
 import game.UI.BoardDrawing;
 
 public class uiDrawing {
-    public void DrawUi()
+    public int DrawUi()
     {
         BoardDrawing newchess = new BoardDrawing();
         Scanner sc = new Scanner(System.in);
@@ -11,6 +11,7 @@ public class uiDrawing {
 
         StringBuffer systemUI = new StringBuffer();
         systemUI.append("=============================================\n");
+        //심심해서 넣은 로고
         systemUI.append("     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n");
         systemUI.append("     █░░░░░░░░▀█▄▀▄▀██████░▀█▄▀▄▀██████░\n");
         systemUI.append("     ░░░░░░░░░░░▀█▄█▄███▀░░░ ▀██▄█▄███▀░\n");
@@ -30,11 +31,13 @@ public class uiDrawing {
         switch(gameMode)
         {
             case 1:
-                //System.out.println("pvp");
+                System.out.println("PVP 모드로 선택하셨습니다.");
                 newchess.DrawChessBoard();
+
                 break;
             case 2:
-                System.out.println("pve");
+                //System.out.println("pve");
+
                 break;
             case 3:
                 System.out.println("eve");
@@ -45,11 +48,10 @@ public class uiDrawing {
                 System.out.println("다시 입력해주세요\n");
                 DrawUi();
                 break;
-        }
+            
         
-
-
-
+        }
+        return gameMode;
 
 
     }
