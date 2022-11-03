@@ -28,7 +28,7 @@ public class BoardDrawing{
         }
         board.append("┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛\n");
         board.append("      1    2    3    4    5    6    7    8\n");
-        board.append("=============================================\n");
+        board.append("=============================================");
         System.out.println(board);
     }
 }
