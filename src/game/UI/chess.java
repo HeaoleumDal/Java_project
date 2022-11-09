@@ -19,6 +19,7 @@ public class chess {
 
     public final String[] WhitePiece = {WhitePawn, WhiteRook, WhiteKnight, WhiteBishop, WhiteQueen, WhiteKing};
     public final String[] BlackPiece = {BlackPawn, BlackRook, BlackKnight, BlackBishop, BlackQueen, BlackKing};
+    public final String[] Piece = {"Pawn", "Rook", "Knight", "Bishop", "Queen", "King"};
 
     public String[][] chessboard =
     {
