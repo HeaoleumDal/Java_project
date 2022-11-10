@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {  
         uiDrawing gameStart = new uiDrawing();
         pieceMovingUI pieceMovingUI = new pieceMovingUI();
-        //chess chess = new chess();
+        chess chess = new chess();
         int mode = gameStart.DrawUi();
         try {
             pieceMovingUI.DrawMovingUI(mode);
