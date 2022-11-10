@@ -36,4 +36,10 @@ public class chess {
     public chess(){
         String board[][] = this.chessboard;
     }
+
+    
+    public void Swap(int now_x, int now_y, int next_x, int next_y, String Piece){
+        chessboard[next_y][next_x] = Piece;
+        chessboard[now_y][now_x] = nullPiece;
+    }
 }
