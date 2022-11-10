@@ -6,14 +6,14 @@ public class Location {
     chess chess = new chess();
 
     public Boolean NowLocationIsNull(int x, int y) {
-        if(chess.chessboard[y][x] == chess.nullpiece) {
+        if(chess.chessboard[y][x] == chess.nullPiece) {
             return true;
         }
         return false;
     }
 
     public Boolean NextLocationIsNull(int x, int y){
-        if(chess.chessboard[y][x] == chess.nullpiece){
+        if(chess.chessboard[y][x] == chess.nullPiece){
             return true;
         }
         return false;
@@ -21,14 +21,14 @@ public class Location {
 
     public String NowLocationPiece(int x, int y){
         if(NowLocationIsNull(x, y)){
-            return chess.nullpiece;
+            return chess.nullPiece;
         }
         return chess.chessboard[y][x];
     }
 
     public String NextLocationPiece(int x, int y){
         if(NextLocationIsNull(x, y)){
-            return chess.nullpiece;
+            return chess.nullPiece;
         }
         return chess.chessboard[y][x];
     }

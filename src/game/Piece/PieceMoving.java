@@ -1,7 +1,7 @@
 package game.Piece;
-import game.Piece.*;
 import game.UI.chess;
 import game.location.Location;
+import game.Piece.PawnPiece;
 
 public class PieceMoving {
     chess chess = new chess();
@@ -14,7 +14,6 @@ public class PieceMoving {
         int next_x = char_next_x - 49;
         int next_y = 72 - char_next_y;
         String nowPiece = location.NowLocationPiece(now_x, now_y);
-        System.out.println(nowPiece);
         if(now_x >= 0 && now_x <= 7 && now_y >= 0 && now_y <= 7 && next_x >= 0 && next_y <= 7 ){
             if(Color == "White"){
                 if(nowPiece == chess.WhitePawn){
