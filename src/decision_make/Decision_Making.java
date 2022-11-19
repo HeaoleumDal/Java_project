@@ -20,7 +20,7 @@ public class Decision_Making {
     }
 
     public void Each_Search(){
-        
+
     }
 
     public void All_Each_Search(){
@@ -28,20 +28,6 @@ public class Decision_Making {
         for(int i = 0;i<8;i++){
             Each_Search();
             //if(max < )
-        }
-    }
-
-    public void Importing_Board(String[][] CI_Board){
-        for(int i = 0; i< 8;i++){
-            for(int j = 0;j<8;j++){
-                if(CI_Board[i][j] == chess.WhitePawn || CI_Board[i][j] == chess.BlackPawn) Import_Board[i][j]=1;
-                else if(CI_Board[i][j] == chess.WhiteRook || CI_Board[i][j] == chess.BlackRook) Import_Board[i][j]=2;
-                else if(CI_Board[i][j] == chess.WhiteKnight || CI_Board[i][j] == chess.BlackKnight) Import_Board[i][j]=3;
-                else if(CI_Board[i][j] == chess.WhiteBishop || CI_Board[i][j] == chess.BlackBishop) Import_Board[i][j]=4;
-                else if(CI_Board[i][j] == chess.WhiteQueen || CI_Board[i][j] == chess.BlackQueen) Import_Board[i][j]=5;
-                else if(CI_Board[i][j] == chess.WhiteKing || CI_Board[i][j] == chess.BlackKing) Import_Board[i][j]=6;
-                   
-            }
         }
     }
 
