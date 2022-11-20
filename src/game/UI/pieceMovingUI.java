@@ -44,6 +44,9 @@ public class pieceMovingUI {
                 else if(turn % 2 != 0)
                 {
                     System.out.println("BLACK TURN!\n");
+                    if(BattleUI() == 2){
+                        break;
+                    }
                     System.out.println("=============================================");
                     System.out.println("움직일 말의 위치를 입력하세요");
                     System.out.print("> ");
@@ -54,7 +57,8 @@ public class pieceMovingUI {
                     System.out.print("> ");
                     StringTokenizer st_next = new StringTokenizer(br.readLine(), " ");
                     char black_next_y = st_next.nextToken().charAt(0);
-                    char black_next_x = st_next.nextToken().charAt(0);
+                    char black_next_x = st_next.nextToken().charAt(0); 
+                    piecemoving.PieceMove(black_now_x, black_now_y, black_next_x, black_next_y, "Black");
                     boardDrawing.DrawChessBoard();
                     turn++;
                 }

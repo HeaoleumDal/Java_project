@@ -1,8 +1,6 @@
 package game.UI;
-import game.UI.chess;
 
 public class BoardDrawing{
-    chess chess = new chess();
     
     public void DrawChessBoard() {
         StringBuffer board = new StringBuffer();
@@ -16,7 +14,7 @@ public class BoardDrawing{
             board.append((char) ascii + "  ┃");
             for (int j = 0; j < 8; j++)
             {
-                board.append(chess.chessboard[i][j] + "┃");
+                board.append(game.UI.chess.chessboard[i][j] + "┃");
             }
             board.append("\n");
             ascii--;
