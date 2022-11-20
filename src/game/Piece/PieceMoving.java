@@ -6,6 +6,7 @@ public class PieceMoving {
     Location location = new Location();
     PawnPiece pawn = new PawnPiece();
     BishopPiece bishop = new BishopPiece();
+    RookPiece rook = new RookPiece();
 
     public Boolean PieceMove(char char_now_x, char char_now_y, char char_next_x, char char_next_y, String Color){
         int now_x = char_now_x - 49;
@@ -29,6 +30,9 @@ public class PieceMoving {
                     }
                 }
                 else if(nowPiece == game.UI.chess.WhiteRook){
+                    if(rook.WhiteRookMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
     
                 }
                 else if(nowPiece == game.UI.chess.WhiteQueen){
@@ -52,6 +56,9 @@ public class PieceMoving {
     
                 }
                 else if(nowPiece == game.UI.chess.BlackRook){
+                    if(rook.BlackRookMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
     
                 }
                 else if(nowPiece == game.UI.chess.BlackQueen){

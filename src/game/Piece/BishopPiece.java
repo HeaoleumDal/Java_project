@@ -1,7 +1,6 @@
 package game.Piece;
 import game.UI.chess;
 import game.location.Location;
-import java.lang.Math.*;
 public class BishopPiece{
     Location location = new Location();
 
@@ -33,7 +32,7 @@ public class BishopPiece{
         {
             if(xDiff > yDiff) 
             {
-                for(int i=1; i<xDiff; i++) 
+                for(int i = 1; i < xDiff; i++)
                 {
                     //x + i, y - i
                     if(location.NextLocationIsNull(now_x + i, now_y - i) || !(location.NextLocationColor(now_x + i, now_y - i) == "White")) 
@@ -44,7 +43,7 @@ public class BishopPiece{
             } 
             else 
             {
-                for(int i=1; i<yDiff; i++) 
+                for(int i = 1; i < yDiff; i++) 
                 {
                     //x - i, y + i
                     if(location.NextLocationIsNull(now_x - i, now_y + i) || !(location.NextLocationColor(now_x - i, now_y + i) == "White")) 
@@ -58,7 +57,7 @@ public class BishopPiece{
 
         else if(canMove & xyDiff > 0) 
         {
-            for(int i=1; i<xDiff; i++) 
+            for(int i = 1; i < xDiff; i++) 
             {
                 //x + i, y + i
                 if(location.NextLocationIsNull(now_x + i, now_y + i) || !(location.NextLocationColor(now_x + i, now_y + i) == "White")) 
@@ -71,7 +70,7 @@ public class BishopPiece{
 
         else if(canMove)
         {
-            for(int i=1; i<Math.abs(xDiff); i++) 
+            for(int i = 1; i < Math.abs(xDiff); i++) 
             {
                 //x - i, y - i
                 if(location.NextLocationIsNull(now_x - i, now_y - i) || !(location.NextLocationColor(now_x - i, now_y - i) == "White")) 
@@ -114,7 +113,7 @@ public class BishopPiece{
         {
             if(xDiff > yDiff) 
             {
-                for(int i=1; i<xDiff; i++) 
+                for(int i = 1; i < xDiff; i++) 
                 {
                     //x + i, y - i
                     if(location.NextLocationIsNull(now_x + i, now_y - i) || !(location.NextLocationColor(now_x + i, now_y - i) == "Black")) 
@@ -125,7 +124,7 @@ public class BishopPiece{
             } 
             else 
             {
-                for(int i=1; i<yDiff; i++) 
+                for(int i = 1;  i < yDiff; i++) 
                 {
                     //x - i, y + i
                     if(location.NextLocationIsNull(now_x - i, now_y + i) || !(location.NextLocationColor(now_x - i, now_y + i) == "Black")) 
@@ -139,7 +138,7 @@ public class BishopPiece{
 
         else if(canMove & xyDiff > 0) 
         {
-            for(int i=1; i<xDiff; i++) 
+            for(int i = 1; i < xDiff; i++) 
             {
                 //x + i, y + i
                 if(location.NextLocationIsNull(now_x + i, now_y + i) || !(location.NextLocationColor(now_x + i, now_y + i) == "Black")) 
@@ -152,7 +151,7 @@ public class BishopPiece{
 
         else if(canMove)
         {
-            for(int i=1; i<Math.abs(xDiff); i++) 
+            for(int i = 1; i < Math.abs(xDiff); i++) 
             {
                 //x - i, y - i
                 if(location.NextLocationIsNull(now_x - i, now_y - i) || !(location.NextLocationColor(now_x - i, now_y - i) == "Black")) 
