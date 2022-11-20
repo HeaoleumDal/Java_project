@@ -79,7 +79,7 @@ public class pieceMovingUI {
         System.out.println("================= 메뉴 선택 =================");
         System.out.println("1. 계속 하기");
         System.out.println("2. 기권 하기");
-        System.out.println("=============================================\n");
+        System.out.println("=============================================");
         System.out.print("> ");
         int menu = scanner.nextInt();
         return menu;
