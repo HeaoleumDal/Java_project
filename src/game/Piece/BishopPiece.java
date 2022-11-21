@@ -35,7 +35,7 @@ public class BishopPiece{
                 for(int i = 1; i < xDiff; i++)
                 {
                     //x + i, y - i
-                    if(location.NextLocationIsNull(now_x + i, now_y - i) || !(location.NextLocationColor(now_x + i, now_y - i) == "White")) 
+                    if(location.LocationIsNull(now_x + i, now_y - i) || !(location.LocationColor(now_x + i, now_y - i) == "White")) 
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteBishop);
                     }
@@ -46,7 +46,7 @@ public class BishopPiece{
                 for(int i = 1; i < yDiff; i++) 
                 {
                     //x - i, y + i
-                    if(location.NextLocationIsNull(now_x - i, now_y + i) || !(location.NextLocationColor(now_x - i, now_y + i) == "White")) 
+                    if(location.LocationIsNull(now_x - i, now_y + i) || !(location.LocationColor(now_x - i, now_y + i) == "White")) 
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteBishop);
                     }
@@ -60,7 +60,7 @@ public class BishopPiece{
             for(int i = 1; i < xDiff; i++) 
             {
                 //x + i, y + i
-                if(location.NextLocationIsNull(now_x + i, now_y + i) || !(location.NextLocationColor(now_x + i, now_y + i) == "White")) 
+                if(location.LocationIsNull(now_x + i, now_y + i) || !(location.LocationColor(now_x + i, now_y + i) == "White")) 
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteBishop);
                 }
@@ -73,7 +73,7 @@ public class BishopPiece{
             for(int i = 1; i < Math.abs(xDiff); i++) 
             {
                 //x - i, y - i
-                if(location.NextLocationIsNull(now_x - i, now_y - i) || !(location.NextLocationColor(now_x - i, now_y - i) == "White")) 
+                if(location.LocationIsNull(now_x - i, now_y - i) || !(location.LocationColor(now_x - i, now_y - i) == "White")) 
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteBishop);
                 }
@@ -116,7 +116,7 @@ public class BishopPiece{
                 for(int i = 1; i < xDiff; i++) 
                 {
                     //x + i, y - i
-                    if(location.NextLocationIsNull(now_x + i, now_y - i) || !(location.NextLocationColor(now_x + i, now_y - i) == "Black")) 
+                    if(location.LocationIsNull(now_x + i, now_y - i) || !(location.LocationColor(now_x + i, now_y - i) == "Black")) 
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackBishop);
                     }
@@ -127,7 +127,7 @@ public class BishopPiece{
                 for(int i = 1;  i < yDiff; i++) 
                 {
                     //x - i, y + i
-                    if(location.NextLocationIsNull(now_x - i, now_y + i) || !(location.NextLocationColor(now_x - i, now_y + i) == "Black")) 
+                    if(location.LocationIsNull(now_x - i, now_y + i) || !(location.LocationColor(now_x - i, now_y + i) == "Black")) 
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackBishop);
                     }
@@ -141,7 +141,7 @@ public class BishopPiece{
             for(int i = 1; i < xDiff; i++) 
             {
                 //x + i, y + i
-                if(location.NextLocationIsNull(now_x + i, now_y + i) || !(location.NextLocationColor(now_x + i, now_y + i) == "Black")) 
+                if(location.LocationIsNull(now_x + i, now_y + i) || !(location.LocationColor(now_x + i, now_y + i) == "Black")) 
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackBishop);
                 }
@@ -154,7 +154,7 @@ public class BishopPiece{
             for(int i = 1; i < Math.abs(xDiff); i++) 
             {
                 //x - i, y - i
-                if(location.NextLocationIsNull(now_x - i, now_y - i) || !(location.NextLocationColor(now_x - i, now_y - i) == "Black")) 
+                if(location.LocationIsNull(now_x - i, now_y - i) || !(location.LocationColor(now_x - i, now_y - i) == "Black")) 
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackBishop);
                 }
@@ -168,7 +168,7 @@ public class BishopPiece{
     }
 
     public Boolean BishopCatch(int now_x, int now_y, int next_x, int next_y){
-        String Color = location.NowLocationColor(now_x, now_y);
+        String Color = location.LocationColor(now_x, now_y);
         if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
             if(Color == "White"){
                 if(now_y > next_y){

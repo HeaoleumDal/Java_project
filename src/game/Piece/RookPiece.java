@@ -25,7 +25,7 @@ public class RookPiece
             {
                 for(int i = 1 ; i < yDiff ; i++)
                 {
-                    if(location.NextLocationIsNull(now_x, now_y - i) || !(location.NextLocationColor(now_x, now_y - i) == "White"))
+                    if(location.LocationIsNull(now_x, now_y - i) || !(location.LocationColor(now_x, now_y - i) == "White"))
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
                     }
@@ -37,7 +37,7 @@ public class RookPiece
             {
                 for(int i = 1 ; i < yDiff ; i++)
                 {
-                    if(location.NextLocationIsNull(now_x, now_y + i) || !(location.NextLocationColor(now_x, now_y + i) == "White"))
+                    if(location.LocationIsNull(now_x, now_y + i) || !(location.LocationColor(now_x, now_y + i) == "White"))
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
                     }
@@ -50,7 +50,7 @@ public class RookPiece
         {
             for(int i = 1 ; i < xDiff ; i++)
             {
-                if(location.NextLocationIsNull(now_x + i, now_y) || !(location.NextLocationColor(now_x + i, now_y) == "White"))
+                if(location.LocationIsNull(now_x + i, now_y) || !(location.LocationColor(now_x + i, now_y) == "White"))
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
                 }
@@ -62,7 +62,7 @@ public class RookPiece
         {
             for(int i = 1 ; i < xDiff ; i++)
             {
-                if(location.NextLocationIsNull(now_x - i, now_y) || !(location.NextLocationColor(now_x - i, now_y) == "White"))
+                if(location.LocationIsNull(now_x - i, now_y) || !(location.LocationColor(now_x - i, now_y) == "White"))
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
                 }
@@ -95,7 +95,7 @@ public class RookPiece
             {
                 for(int i = 1 ; i < yDiff ; i++)
                 {
-                    if(location.NextLocationIsNull(now_x, now_y - i) || !(location.NextLocationColor(now_x, now_y - i) == "Black"))
+                    if(location.LocationIsNull(now_x, now_y - i) || !(location.LocationColor(now_x, now_y - i) == "Black"))
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
                     }
@@ -107,7 +107,7 @@ public class RookPiece
             {
                 for(int i = 1 ; i < yDiff ; i++)
                 {
-                    if(location.NextLocationIsNull(now_x, now_y + i) || !(location.NextLocationColor(now_x, now_y + i) == "Black"))
+                    if(location.LocationIsNull(now_x, now_y + i) || !(location.LocationColor(now_x, now_y + i) == "Black"))
                     {
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
                     }
@@ -121,7 +121,7 @@ public class RookPiece
         {
             for(int i = 1 ; i < xDiff ; i++)
             {
-                if(location.NextLocationIsNull(now_x + i, now_y) || !(location.NextLocationColor(now_x + i, now_y) == "Black"))
+                if(location.LocationIsNull(now_x + i, now_y) || !(location.LocationColor(now_x + i, now_y) == "Black"))
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
                 }
@@ -133,7 +133,7 @@ public class RookPiece
         {
             for(int i = 1 ; i < xDiff ; i++)
             {
-                if(location.NextLocationIsNull(now_x - i, now_y) || !(location.NextLocationColor(now_x - i, now_y) == "Black"))
+                if(location.LocationIsNull(now_x - i, now_y) || !(location.LocationColor(now_x - i, now_y) == "Black"))
                 {
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
                 }
@@ -147,7 +147,7 @@ public class RookPiece
     }
 
     public Boolean RookCatch(int now_x, int now_y, int next_x, int next_y){
-        String Color = location.NowLocationColor(now_x, now_y);
+        String Color = location.LocationColor(now_x, now_y);
         if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
             if(Color == "White"){
                 if(now_y > next_y){

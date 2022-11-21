@@ -7,11 +7,15 @@ public class PawnPiece{
     public boolean WhitePawnMove(int now_x, int now_y, int next_x, int next_y) {
         Boolean NextIsNull = true;
         if(PawnCatch(now_x, now_y, next_x, next_y)){
+            System.out.println("True");
             chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
             return true;
         }
+        if(now_x != next_x){
+            return false;
+        }
         for(int i = now_y - 1; i >= next_y; i--){
-            if(location.NextLocationIsNull(next_x, i)){
+            if(location.LocationIsNull(next_x, i)){
                 NextIsNull = true;
             }
             else{
@@ -21,12 +25,12 @@ public class PawnPiece{
         }
         if(NextIsNull){
             if(now_y == 6){
-                if(now_y - next_y < 3 && now_y - next_y > 0 && location.NextLocationIsNull(next_x, next_y)){
+                if(now_y - next_y < 3 && now_y - next_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
                 }
             }
             else{
-                if(now_y - next_y < 2 && now_y - next_y > 0 && location.NextLocationIsNull(next_x, next_y)){
+                if(now_y - next_y < 2 && now_y - next_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
                 }
             }
@@ -43,8 +47,11 @@ public class PawnPiece{
             chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
             return true;
         }
+        if(now_x != next_x){
+            return false;
+        }
         for(int i = now_y + 1; i <= next_y; i++){
-            if(location.NextLocationIsNull(next_x, i)){
+            if(location.LocationIsNull(next_x, i)){
                 NextIsNull = true;
             }
             else{
@@ -54,12 +61,12 @@ public class PawnPiece{
         }
         if(NextIsNull){
             if(now_y == 1){
-                if(next_y - now_y < 3 && next_y - now_y > 0 && location.NextLocationIsNull(next_x, next_y)){
+                if(next_y - now_y < 3 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
                 }
             }
             else{
-                if(next_y - now_y < 2 && next_y - now_y > 0 && location.NextLocationIsNull(next_x, next_y)){
+                if(next_y - now_y < 2 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
                 }
             }
@@ -71,9 +78,9 @@ public class PawnPiece{
     }
 
     public Boolean PawnCatch(int now_x, int now_y, int next_x, int next_y){
-        String Color = location.NowLocationColor(now_x, now_y);
+        Boolean ColorDiff = location.LocationColor(now_x, now_y) != location.LocationColor(next_x, next_y) ? true : false;
         if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
-            if(Color == "White"){
+            if(ColorDiff){
                 if(now_y > next_y){
                     return true;
                 }
@@ -81,7 +88,7 @@ public class PawnPiece{
                     return false;
                 }
             }
-            else if(Color == "Black"){
+            else if(ColorDiff){
                 if(now_y < next_y){
                     return true;
                 }
