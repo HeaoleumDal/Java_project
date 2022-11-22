@@ -33,11 +33,6 @@ public class chess {
             { WhiteRook, WhiteKnight, WhiteBishop, WhiteQueen, WhiteKing, WhiteBishop, WhiteKnight, WhiteRook }
     };
 
-    public chess(){
-        String board[][] = this.chessboard;
-    }
-
-    
     public static void Swap(int now_x, int now_y, int next_x, int next_y, String Piece){
         chessboard[next_y][next_x] = Piece;
         chessboard[now_y][now_x] = nullPiece;
