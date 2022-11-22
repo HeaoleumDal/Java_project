@@ -1,7 +1,5 @@
 package game.Piece;
-import game.UI.chess;
 import game.location.Location;
-import game.Piece.*;
 
 public class QueenPiece {
     Location location = new Location();

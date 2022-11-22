@@ -8,14 +8,9 @@ public class RookPiece
 
     public boolean WhiteRookMove(int now_x, int now_y, int next_x, int next_y) 
     {
+        String Piece = location.LocationPiece(now_x, now_y);
         int xDiff = Math.abs(now_x - next_x) + 1;
         int yDiff = Math.abs(now_y - next_y) + 1;
-
-        //말 잡았을 때
-        if(RookCatch(now_x, now_y, next_x, next_y)){
-            chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook);
-            return true;
-        }
     
         //행마하기
         if(now_x == next_x)
@@ -27,7 +22,7 @@ public class RookPiece
                 {
                     if(location.LocationIsNull(now_x, now_y - i) || !(location.LocationColor(now_x, now_y - i) == "White"))
                     {
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
+                        chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                     }
                 }
                 return false;
@@ -39,7 +34,7 @@ public class RookPiece
                 {
                     if(location.LocationIsNull(now_x, now_y + i) || !(location.LocationColor(now_x, now_y + i) == "White"))
                     {
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
+                        chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                     }
                 }
                 return false;
@@ -52,7 +47,7 @@ public class RookPiece
             {
                 if(location.LocationIsNull(now_x + i, now_y) || !(location.LocationColor(now_x + i, now_y) == "White"))
                 {
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
+                    chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                 }
             }
             return false;
@@ -64,7 +59,7 @@ public class RookPiece
             {
                 if(location.LocationIsNull(now_x - i, now_y) || !(location.LocationColor(now_x - i, now_y) == "White"))
                 {
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.WhiteRook); 
+                    chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                 }
             }
             return false;
@@ -78,14 +73,9 @@ public class RookPiece
 
     public Boolean BlackRookMove(int now_x, int now_y, int next_x, int next_y)
     {
+        String Piece = location.LocationPiece(now_x, now_y);
         int xDiff = Math.abs(now_x - next_x) + 1;
         int yDiff = Math.abs(now_y - next_y) + 1;
-
-        //말 잡았을 때
-        if(RookCatch(now_x, now_y, next_x, next_y)){
-            chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook);
-            return true;
-        }
     
         //행마하기
         if(now_x == next_x)
@@ -97,7 +87,7 @@ public class RookPiece
                 {
                     if(location.LocationIsNull(now_x, now_y - i) || !(location.LocationColor(now_x, now_y - i) == "Black"))
                     {
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
+                        chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                     }
                 }
                 return false;
@@ -109,7 +99,7 @@ public class RookPiece
                 {
                     if(location.LocationIsNull(now_x, now_y + i) || !(location.LocationColor(now_x, now_y + i) == "Black"))
                     {
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
+                        chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                     }
                 }
                 return false;
@@ -123,7 +113,7 @@ public class RookPiece
             {
                 if(location.LocationIsNull(now_x + i, now_y) || !(location.LocationColor(now_x + i, now_y) == "Black"))
                 {
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
+                    chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                 }
             }
             return false;
@@ -135,7 +125,7 @@ public class RookPiece
             {
                 if(location.LocationIsNull(now_x - i, now_y) || !(location.LocationColor(now_x - i, now_y) == "Black"))
                 {
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.BlackRook); 
+                    chess.Swap(now_x, now_y, next_x, next_y, Piece); 
                 }
             }
             return false;
@@ -143,34 +133,6 @@ public class RookPiece
         else
         {
             return true;
-        }
-    }
-
-    public Boolean RookCatch(int now_x, int now_y, int next_x, int next_y){
-        String Color = location.LocationColor(now_x, now_y);
-        if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
-            if(Color == "White"){
-                if(now_y > next_y){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else if(Color == "Black"){
-                if(now_y < next_y){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
         }
     }
 }

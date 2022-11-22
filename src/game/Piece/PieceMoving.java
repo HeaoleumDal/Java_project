@@ -9,10 +9,10 @@ public class PieceMoving {
     QueenPiece queen = new QueenPiece();
 
     public Boolean PieceMove(char char_now_x, char char_now_y, char char_next_x, char char_next_y, String Color){
-        int now_x = char_now_x - 49;
-        int now_y = 72 - char_now_y;
-        int next_x = char_next_x - 49;
-        int next_y = 72 - char_next_y;
+        int now_x = char_now_x - 65;
+        int now_y = 56 - char_now_y;
+        int next_x = char_next_x - 65;
+        int next_y = 56 - char_next_y;
         String nowPiece = location.LocationPiece(now_x, now_y);
         if(now_x >= 0 && now_x <= 7 && now_y >= 0 && now_y <= 7 && next_x >= 0 && next_y <= 7 ){
             if(Color == "White"){
@@ -64,7 +64,9 @@ public class PieceMoving {
     
                 }
                 else if(nowPiece == game.UI.chess.BlackQueen){
-    
+                    if(queen.BlackQueenMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
                 }
                 else if(nowPiece == game.UI.chess.BlackKing){
     
