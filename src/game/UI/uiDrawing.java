@@ -1,6 +1,5 @@
 package game.UI;
 import java.util.Scanner;
-import game.UI.BoardDrawing;
 
 public class uiDrawing {
     public int DrawUi()

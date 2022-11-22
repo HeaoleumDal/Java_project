@@ -5,7 +5,6 @@ import java.util.StringTokenizer;
 
 import javax.lang.model.util.ElementScanner14;
 
-import game.UI.BoardDrawing;
 import game.Piece.PieceMoving;
 
 public class pieceMovingUI {
