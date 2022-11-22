@@ -1,6 +1,6 @@
 package game.Piece;
-import game.UI.chess;
 import game.location.Location;
+
 public class PawnPiece{
     Location location = new Location();
 
@@ -8,7 +8,7 @@ public class PawnPiece{
         Boolean NextIsNull = true;
         if(PawnCatch(now_x, now_y, next_x, next_y)){
             System.out.println("True");
-            chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
+            game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.WhitePawn);
             return true;
         }
         if(now_x != next_x){
@@ -26,12 +26,12 @@ public class PawnPiece{
         if(NextIsNull){
             if(now_y == 6){
                 if(now_y - next_y < 3 && now_y - next_y > 0 && location.LocationIsNull(next_x, next_y)){
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
+                    game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.WhitePawn);
                 }
             }
             else{
                 if(now_y - next_y < 2 && now_y - next_y > 0 && location.LocationIsNull(next_x, next_y)){
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
+                    game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.WhitePawn);
                 }
             }
             return true;
@@ -44,7 +44,7 @@ public class PawnPiece{
     public Boolean BlackPawnMove(int now_x, int now_y, int next_x, int next_y){
         Boolean NextIsNull = true;
         if(PawnCatch(now_x, now_y, next_x, next_y)){
-            chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+            game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.BlackPawn);
             return true;
         }
         if(now_x != next_x){
@@ -62,12 +62,12 @@ public class PawnPiece{
         if(NextIsNull){
             if(now_y == 1){
                 if(next_y - now_y < 3 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+                    game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.BlackPawn);
                 }
             }
             else{
                 if(next_y - now_y < 2 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
-                    chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+                    game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.BlackPawn);
                 }
             }
             return false;

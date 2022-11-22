@@ -1,7 +1,5 @@
 package game.location;
 
-import game.UI.chess;
-
 public class Location {
 
     public Boolean LocationIsNull(int x, int y) {
