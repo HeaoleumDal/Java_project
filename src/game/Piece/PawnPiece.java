@@ -1,4 +1,5 @@
 package game.Piece;
+import game.UI.chess;
 import game.location.Location;
 
 public class PawnPiece{
@@ -9,7 +10,6 @@ public class PawnPiece{
         Boolean NextIsNull = true;
         enpassant.Enpassant(now_x, now_y, next_x, next_y);
         if(PawnCatch(now_x, now_y, next_x, next_y)){
-            System.out.println("True");
             game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.WhitePawn);
             promotion.Promotion(next_x, next_y, "White");
             return true;
@@ -99,19 +99,22 @@ public class PawnPiece{
     public Boolean PawnCatch(int now_x, int now_y, int next_x, int next_y){
         String Color = location.LocationColor(now_x, now_y);
 
-        if(Math.abs(now_x - next_x) == 1){
-            if(Color != location.LocationColor(next_x, next_y) && now_y - next_y == 1){
-                return true;
+        if(!location.LocationIsNull(next_x, next_y)){
+            if(Color == "White"){
+                if(Math.abs(now_x - next_x) == 1){
+                    if(location.LocationColor(next_x, next_y) != Color){
+                        return true;
+                    }
+                }
             }
-            else if(Color != location.LocationColor(next_x, next_y) && next_y - now_y == 1){
-                return true;
-            }
-            else{
-                return false;
+            else if(Color == "Black"){
+                if(Math.abs(now_x - next_x) == 1){
+                    if(location.LocationColor(next_x, next_y) != Color){
+                        return true;
+                    }
+                }
             }
         }
-        else{
-            return false;
-        }
+        return false;
     }
 }

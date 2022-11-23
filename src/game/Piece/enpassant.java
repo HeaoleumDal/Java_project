@@ -13,7 +13,8 @@ public class enpassant {
                 if(black_now_y != 0){
                     if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
-                        chess.chessboard[white_now_y][white_now_x] = chess.nullPiece;
+                        chess.chessboard[black_now_y][black_now_x] = chess.nullPiece;
+                        System.out.println("True");
                     }
                 }
             }
@@ -23,7 +24,8 @@ public class enpassant {
                 if(white_now_y != 0){
                     if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
-                        chess.chessboard[black_now_y][black_now_x] = chess.nullPiece;
+                        chess.chessboard[white_now_y][white_now_x] = chess.nullPiece;
+                        System.out.println("True");
                     }
                 }
             }

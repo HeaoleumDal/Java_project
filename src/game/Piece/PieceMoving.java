@@ -10,9 +10,9 @@ public class PieceMoving {
     KnightPiece knight = new KnightPiece();
 
     public Boolean PieceMove(char char_now_x, char char_now_y, char char_next_x, char char_next_y, String Color){
-        int now_x = char_now_x - 65;
+        int now_x = char_now_x >= 65 && char_now_x <= 72 ? char_now_x - 65 : char_now_x >= 97 && char_now_x <= 104 ? char_now_x - 97 : -1;
         int now_y = 56 - char_now_y;
-        int next_x = char_next_x - 65;
+        int next_x = char_next_x >= 65 && char_next_x <= 72 ? char_next_x - 65 : char_next_x >= 97 && char_next_x <= 104 ? char_next_x - 97 : -1;
         int next_y = 56 - char_next_y;
         String nowPiece = location.LocationPiece(now_x, now_y);
         if(now_x >= 0 && now_x <= 7 && now_y >= 0 && now_y <= 7 && next_x >= 0 && next_y <= 7 ){
