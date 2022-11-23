@@ -89,14 +89,13 @@ public class PawnPiece{
     }
 
     public Boolean PawnCatch(int now_x, int now_y, int next_x, int next_y){
-        Boolean ColorDiff = location.LocationColor(now_x, now_y) != location.LocationColor(next_x, next_y) ? true : false;
         String Color = location.LocationColor(now_x, now_y);
 
-        if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
-            if(ColorDiff && Color == "White" && now_y - next_y == 1){
+        if(Math.abs(now_x - next_x) == 1){
+            if(Color != location.LocationColor(next_x, next_y) && now_y - next_y == 1){
                 return true;
             }
-            else if(ColorDiff && Color == "Black" && next_y - now_y == 1){
+            else if(Color != location.LocationColor(next_x, next_y) && next_y - now_y == 1){
                 return true;
             }
             else{
