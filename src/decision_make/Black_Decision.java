@@ -28,47 +28,48 @@ public class Black_Decision {
 
     }
 
-    public void SwapMax(int x, int y, int m_x, int m_y){
-        max = Import_Board[x+m_x][y+m_y];
-        max_x = x; max_y = y;
-        max_next_x = x + m_x; max_next_y = y + m_y;
+    public void SwapMax(int x, int y, int m_x, int m_y) {
+        max = Import_Board[x + m_x][y + m_y];
+        max_x = x;
+        max_y = y;
+        max_next_x = x + m_x;
+        max_next_y = y + m_y;
     }
 
-    public int Check_Import(int now_dx, int now_dy) {
+    public void Check_Import(int now_dx, int now_dy) {
         int max = 0;
         // Pawn Move
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackPawn) {
             if ((now_dx + 1 <= 0)) {
-                if(max < Import_Board[now_dx+1][now_dy]){
+                if (max < Import_Board[now_dx + 1][now_dy]) {
                     SwapMax(now_dx, now_dy, 1, 0);
-                } 
-            } 
-            else if ((now_dx + 2 <= 0 && now_dy == 1)){
-                if(max < Import_Board[now_dx+1][now_dy]){
+                }
+            } else if ((now_dx + 2 <= 0 && now_dy == 1)) {
+                if (max < Import_Board[now_dx + 1][now_dy]) {
                     SwapMax(now_dx, now_dy, 2, 0);
-                } 
+                }
             }
         }
         // Rook Move
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackRook) {
             for (int i = 1; i <= 7; i++) {
-                if (now_dx + i <= 7){
-                    if(max < Import_Board[now_dx + i][now_dy]){
+                if (now_dx + i <= 7) {
+                    if (max < Import_Board[now_dx + i][now_dy]) {
                         SwapMax(now_dx, now_dy, i, 0);
                     }
                 }
-                if (now_dx - i >= 0){
-                    if(max < Import_Board[now_dx - i][now_dy]){
+                if (now_dx - i >= 0) {
+                    if (max < Import_Board[now_dx - i][now_dy]) {
                         SwapMax(now_dx, now_dy, -i, 0);
                     }
                 }
-                if (now_dy + i <= 7){
-                    if(max < Import_Board[now_dx][now_dy + i]){
+                if (now_dy + i <= 7) {
+                    if (max < Import_Board[now_dx][now_dy + i]) {
                         SwapMax(now_dx, now_dy, 0, i);
                     }
                 }
-                if (now_dy - i >= 0){
-                    if(max < Import_Board[now_dx][now_dy - i]){
+                if (now_dy - i >= 0) {
+                    if (max < Import_Board[now_dx][now_dy - i]) {
                         SwapMax(now_dx, now_dy, 0, -i);
                     }
                 }
@@ -76,92 +77,163 @@ public class Black_Decision {
         }
         // Knight Move
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackKnight) {
-            if (now_dx - 2 >= 0 && now_dy - 1 >= 0){
-                if(max < Import_Board[now_dx - 2][now_dy - 1]){
+            if (now_dx - 2 >= 0 && now_dy - 1 >= 0) {
+                if (max < Import_Board[now_dx - 2][now_dy - 1]) {
                     SwapMax(now_dx, now_dy, -2, -1);
                 }
             }
-            if (now_dx - 2 >= 0 && now_dy + 1 <= 7){
-                if(max < Import_Board[now_dx - 2][now_dy + 1]){
+            if (now_dx - 2 >= 0 && now_dy + 1 <= 7) {
+                if (max < Import_Board[now_dx - 2][now_dy + 1]) {
                     SwapMax(now_dx, now_dy, -2, 1);
                 }
             }
-            if (now_dx - 1 >= 0 && now_dy - 2 >= 0)
-                if(max < Import_Board[now_dx - 1][now_dy - 2]){
+            if (now_dx - 1 >= 0 && now_dy - 2 >= 0) {
+                if (max < Import_Board[now_dx - 1][now_dy - 2]) {
                     SwapMax(now_dx, now_dy, -1, -2);
                 }
-            if (now_dx - 1 >= 0 && now_dy + 2 <= 7)
-                if(max < Import_Board[now_dx - 1][now_dy + 2]){
+            }
+            if (now_dx - 1 >= 0 && now_dy + 2 <= 7) {
+                if (max < Import_Board[now_dx - 1][now_dy + 2]) {
                     SwapMax(now_dx, now_dy, -1, 2);
                 }
-            if (now_dx + 1 <= 7 && now_dy - 2 >= 0)
-                if(max < Import_Board[now_dx + 1][now_dy - 2]){
+            }
+            if (now_dx + 1 <= 7 && now_dy - 2 >= 0) {
+                if (max < Import_Board[now_dx + 1][now_dy - 2]) {
                     SwapMax(now_dx, now_dy, 1, -2);
                 }
-            if (now_dx + 1 <= 7 && now_dy + 2 <= 7)
-                if(max < Import_Board[now_dx - 2][now_dy - 1]){
-                    SwapMax(now_dx, now_dy, -2, -1); //수정 요망
+            }
+            if (now_dx + 1 <= 7 && now_dy + 2 <= 7) {
+                if (max < Import_Board[now_dx - 2][now_dy - 1]) {
+                    SwapMax(now_dx, now_dy, 1, 2); // 수정 요망
                 }
-            if (now_dx + 2 <= 7 && now_dy - 1 >= 0)
-                ;
-            if (now_dx + 2 <= 7 && now_dy + 1 <= 7)
-                ;
+            }
+            if (now_dx + 2 <= 7 && now_dy - 1 >= 0) {
+                if (max < Import_Board[now_dx + 2][now_dy - 1]) {
+                    SwapMax(now_dx, now_dy, 2, -1);
+                }
+            }
+
+            if (now_dx + 2 <= 7 && now_dy + 1 <= 7) {
+                if (max < Import_Board[now_dx + 2][now_dy + 1]) {
+                    SwapMax(now_dx, now_dy, 2, 1);
+                }
+            }
         }
         // Bishop Move
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackBishop
                 || location.LocationPiece(now_dx, now_dy) == chess.WhiteBishop) {
             for (int i = 1; i <= 7; i++) {
-                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy + i == next_dy && now_dy + i <= 7))
-                    ; // 아래로, 오른쪽 - 4 사분면
-                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy + i == next_dy && now_dy + i <= 7))
-                    ; // 위로, 오른쪽 - 1 사분면
-                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy - i == next_dy && now_dy - i >= 0))
-                    ; // 아래로, 왼쪽 - 3 사분면
-                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy - i == next_dy && now_dy - i >= 0))
-                    ; // 위로, 왼쪽 - 2 사분면
+                if ((now_dx + i <= 7) && (now_dy + i <= 7)) {
+                    if (max < Import_Board[now_dx + i][now_dy + i]) {
+                        SwapMax(now_dx, now_dy, i, i);
+                    }
+                } // 아래로, 오른쪽 - 4 사분면
+                if ((now_dx - i >= 0) && (now_dy + i <= 7)) {
+                    if (max < Import_Board[now_dx - i][now_dy + i]) {
+                        SwapMax(now_dx, now_dy, i, -i);
+                    }
+                } // 위로, 오른쪽 - 1 사분면
+                if ((now_dx + i <= 7) && (now_dy - i >= 0)) {
+                    if (max < Import_Board[now_dx + i][now_dy - i]) {
+                        SwapMax(now_dx, now_dy, i, -i);
+                    }
+                } // 아래로, 왼쪽 - 3 사분면
+                if ((now_dx - i >= 0) && (now_dy - i >= 0)) {
+                    if (max < Import_Board[now_dx - i][now_dy - i]) {
+                        SwapMax(now_dx, now_dy, -i, -i);
+                    }
+                } // 위로, 왼쪽 - 2 사분면
             }
         }
         // Queen
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackQueen
                 || location.LocationPiece(now_dx, now_dy) == chess.WhiteQueen) {
             for (int i = 1; i <= 7; i++) {
-                if (now_dx + i == next_dx && now_dx + i <= 7)
-                    ; // -y 방향
-                if (now_dx - i == next_dx && now_dx - i >= 0)
-                    ; // +y 방향
-                if (now_dy + i == next_dy && now_dy + i <= 7)
-                    ; // -x 방향
-                if (now_dy - i == next_dy && now_dy - i >= 0)
-                    ; // +x 방향
-                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy + i == next_dy && now_dy + i <= 7))
-                    ; // 아래로, 오른쪽 - 4 사분면
-                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy + i == next_dy && now_dy + i <= 7))
-                    ; // 위로, 오른쪽 - 1 사분면
-                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy - i == next_dy && now_dy - i >= 0))
-                    ; // 아래로, 왼쪽 - 3 사분면
-                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy - i == next_dy && now_dy - i >= 0))
-                    ; // 위로, 왼쪽 - 2 사분면
+                if (now_dx + i <= 7) {
+                    if (max < Import_Board[now_dx + i][now_dy]) {
+                        SwapMax(now_dx, now_dy, i, 0);
+                    }
+                }
+                if (now_dx - i >= 0) {
+                    if (max < Import_Board[now_dx - i][now_dy]) {
+                        SwapMax(now_dx, now_dy, -i, 0);
+                    }
+                }
+                if (now_dy + i <= 7) {
+                    if (max < Import_Board[now_dx][now_dy + i]) {
+                        SwapMax(now_dx, now_dy, 0, i);
+                    }
+                }
+                if (now_dy - i >= 0) {
+                    if (max < Import_Board[now_dx][now_dy - i]) {
+                        SwapMax(now_dx, now_dy, 0, -i);
+                    }
+                }
+                if ((now_dx + i <= 7) && (now_dy + i <= 7)) {
+                    if (max < Import_Board[now_dx + i][now_dy + i]) {
+                        SwapMax(now_dx, now_dy, i, i);
+                    }
+                } // 아래로, 오른쪽 - 4 사분면
+                if ((now_dx - i >= 0) && (now_dy + i <= 7)) {
+                    if (max < Import_Board[now_dx - i][now_dy + i]) {
+                        SwapMax(now_dx, now_dy, i, -i);
+                    }
+                } // 위로, 오른쪽 - 1 사분면
+                if ((now_dx + i <= 7) && (now_dy - i >= 0)) {
+                    if (max < Import_Board[now_dx + i][now_dy - i]) {
+                        SwapMax(now_dx, now_dy, i, -i);
+                    }
+                } // 아래로, 왼쪽 - 3 사분면
+                if ((now_dx - i >= 0) && (now_dy - i >= 0)) {
+                    if (max < Import_Board[now_dx - i][now_dy - i]) {
+                        SwapMax(now_dx, now_dy, -i, -i);
+                    }
+                } // 위로, 왼쪽 - 2 사분면
             }
         }
         // King
         if (location.LocationPiece(now_dx, now_dy) == chess.BlackKing
                 && location.LocationPiece(now_dx, now_dy) == chess.WhiteKing) {
-            if (now_dx + 1 == next_dx && now_dx + 1 <= 7)
-                ; // -y 방향
-            if (now_dx - 1 == next_dx && now_dx - 1 >= 0)
-                ; // +y 방향
-            if (now_dy + 1 == next_dy && now_dy + 1 <= 7)
-                ; // -x 방향
-            if (now_dy - 1 == next_dy && now_dy - 1 >= 0)
-                ; // +x 방향
-            if ((now_dx + 1 == next_dx && now_dx + 1 <= 7) && (now_dy + 1 == next_dy && now_dy + 1 <= 7))
-                ; // 아래로, 오른쪽 - 4 사분면
-            if ((now_dx - 1 == next_dx && now_dx - 1 >= 0) && (now_dy + 1 == next_dy && now_dy + 1 <= 7))
-                ; // 위로, 오른쪽 - 1 사분면
-            if ((now_dx + 1 == next_dx && now_dx + 1 <= 7) && (now_dy - 1 == next_dy && now_dy - 1 >= 0))
-                ; // 아래로, 왼쪽 - 3 사분면
-            if ((now_dx - 1 == next_dx && now_dx - 1 >= 0) && (now_dy - 1 == next_dy && now_dy - 1 >= 0))
-                ; // 위로, 왼쪽 - 2 사분면
+            if (now_dx + 1 <= 7) {
+                if (max < Import_Board[now_dx + 1][now_dy]) {
+                    SwapMax(now_dx, now_dy, 1, 0);
+                }
+            }
+            if (now_dx - 1 >= 0) {
+                if (max < Import_Board[now_dx - 1][now_dy]) {
+                    SwapMax(now_dx, now_dy, -1, 0);
+                }
+            }
+            if (now_dy + 1 <= 7) {
+                if (max < Import_Board[now_dx][now_dy + 1]) {
+                    SwapMax(now_dx, now_dy, 0, 1);
+                }
+            }
+            if (now_dy - 1 >= 0) {
+                if (max < Import_Board[now_dx][now_dy - 1]) {
+                    SwapMax(now_dx, now_dy, 0, -1);
+                }
+            }
+            if ((now_dx + 1 <= 7) && (now_dy + 1 <= 7)) {
+                if (max < Import_Board[now_dx + 1][now_dy + 1]) {
+                    SwapMax(now_dx, now_dy, 1, 1);
+                }
+            } // 아래로, 오른쪽 - 4 사분면
+            if ((now_dx - 1 >= 0) && (now_dy + 1 <= 7)) {
+                if (max < Import_Board[now_dx - 1][now_dy + 1]) {
+                    SwapMax(now_dx, now_dy, 1, -1);
+                }
+            } // 위로, 오른쪽 - 1 사분면
+            if ((now_dx + 1 <= 7) && (now_dy - 1 >= 0)) {
+                if (max < Import_Board[now_dx + 1][now_dy - 1]) {
+                    SwapMax(now_dx, now_dy, 1, -1);
+                }
+            } // 아래로, 왼쪽 - 3 사분면
+            if ((now_dx - 1 >= 0) && (now_dy - 1 >= 0)) {
+                if (max < Import_Board[now_dx - 1][now_dy - 1]) {
+                    SwapMax(now_dx, now_dy, -1, -1);
+                }
+            } // 위로, 왼쪽 - 2 사분면
         }
     }
 
