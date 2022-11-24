@@ -1,7 +1,6 @@
 package decision_make;
 import game.UI.chess;
 import game.location.Location;
-import javafx.fxml.LoadException;
 
 public class Decision_Making {
     private int[] Current_Piece_Import;

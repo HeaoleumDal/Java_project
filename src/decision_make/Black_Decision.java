@@ -1,4 +1,5 @@
 package decision_make;
+
 import game.UI.chess;
 import game.location.Location;
 import decision_make.Decision_Making;
@@ -7,8 +8,9 @@ public class Black_Decision {
     private int[][] Import_Board;
     private int[][] Settlexy = new int[20][2];
     private int Each_Max; // 각 말들이 가질 수 있는 최대값
-    private int Max; // 각 팀에서 가질 수 있는 최대값
-    private int Max_x, Max_y;
+    private int max; // 각 팀에서 가질 수 있는 최대값
+    private int max_x, max_y;
+    private int max_next_x, max_next_y;
     public int count = 0;
     Location location = new Location();
 
@@ -19,6 +21,147 @@ public class Black_Decision {
                 Importing_Board(i, j, CI_Board);
                 Settling_Board(i, j);
             }
+        }
+        for (int i = 0; i < 20; i++) {
+
+        }
+
+    }
+
+    public void SwapMax(int x, int y, int m_x, int m_y){
+        max = Import_Board[x+m_x][y+m_y];
+        max_x = x; max_y = y;
+        max_next_x = x + m_x; max_next_y = y + m_y;
+    }
+
+    public int Check_Import(int now_dx, int now_dy) {
+        int max = 0;
+        // Pawn Move
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackPawn) {
+            if ((now_dx + 1 <= 0)) {
+                if(max < Import_Board[now_dx+1][now_dy]){
+                    SwapMax(now_dx, now_dy, 1, 0);
+                } 
+            } 
+            else if ((now_dx + 2 <= 0 && now_dy == 1)){
+                if(max < Import_Board[now_dx+1][now_dy]){
+                    SwapMax(now_dx, now_dy, 2, 0);
+                } 
+            }
+        }
+        // Rook Move
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackRook) {
+            for (int i = 1; i <= 7; i++) {
+                if (now_dx + i <= 7){
+                    if(max < Import_Board[now_dx + i][now_dy]){
+                        SwapMax(now_dx, now_dy, i, 0);
+                    }
+                }
+                if (now_dx - i >= 0){
+                    if(max < Import_Board[now_dx - i][now_dy]){
+                        SwapMax(now_dx, now_dy, -i, 0);
+                    }
+                }
+                if (now_dy + i <= 7){
+                    if(max < Import_Board[now_dx][now_dy + i]){
+                        SwapMax(now_dx, now_dy, 0, i);
+                    }
+                }
+                if (now_dy - i >= 0){
+                    if(max < Import_Board[now_dx][now_dy - i]){
+                        SwapMax(now_dx, now_dy, 0, -i);
+                    }
+                }
+            }
+        }
+        // Knight Move
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackKnight) {
+            if (now_dx - 2 >= 0 && now_dy - 1 >= 0){
+                if(max < Import_Board[now_dx - 2][now_dy - 1]){
+                    SwapMax(now_dx, now_dy, -2, -1);
+                }
+            }
+            if (now_dx - 2 >= 0 && now_dy + 1 <= 7){
+                if(max < Import_Board[now_dx - 2][now_dy + 1]){
+                    SwapMax(now_dx, now_dy, -2, 1);
+                }
+            }
+            if (now_dx - 1 >= 0 && now_dy - 2 >= 0)
+                if(max < Import_Board[now_dx - 1][now_dy - 2]){
+                    SwapMax(now_dx, now_dy, -1, -2);
+                }
+            if (now_dx - 1 >= 0 && now_dy + 2 <= 7)
+                if(max < Import_Board[now_dx - 1][now_dy + 2]){
+                    SwapMax(now_dx, now_dy, -1, 2);
+                }
+            if (now_dx + 1 <= 7 && now_dy - 2 >= 0)
+                if(max < Import_Board[now_dx + 1][now_dy - 2]){
+                    SwapMax(now_dx, now_dy, 1, -2);
+                }
+            if (now_dx + 1 <= 7 && now_dy + 2 <= 7)
+                if(max < Import_Board[now_dx - 2][now_dy - 1]){
+                    SwapMax(now_dx, now_dy, -2, -1); //수정 요망
+                }
+            if (now_dx + 2 <= 7 && now_dy - 1 >= 0)
+                ;
+            if (now_dx + 2 <= 7 && now_dy + 1 <= 7)
+                ;
+        }
+        // Bishop Move
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackBishop
+                || location.LocationPiece(now_dx, now_dy) == chess.WhiteBishop) {
+            for (int i = 1; i <= 7; i++) {
+                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy + i == next_dy && now_dy + i <= 7))
+                    ; // 아래로, 오른쪽 - 4 사분면
+                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy + i == next_dy && now_dy + i <= 7))
+                    ; // 위로, 오른쪽 - 1 사분면
+                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy - i == next_dy && now_dy - i >= 0))
+                    ; // 아래로, 왼쪽 - 3 사분면
+                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy - i == next_dy && now_dy - i >= 0))
+                    ; // 위로, 왼쪽 - 2 사분면
+            }
+        }
+        // Queen
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackQueen
+                || location.LocationPiece(now_dx, now_dy) == chess.WhiteQueen) {
+            for (int i = 1; i <= 7; i++) {
+                if (now_dx + i == next_dx && now_dx + i <= 7)
+                    ; // -y 방향
+                if (now_dx - i == next_dx && now_dx - i >= 0)
+                    ; // +y 방향
+                if (now_dy + i == next_dy && now_dy + i <= 7)
+                    ; // -x 방향
+                if (now_dy - i == next_dy && now_dy - i >= 0)
+                    ; // +x 방향
+                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy + i == next_dy && now_dy + i <= 7))
+                    ; // 아래로, 오른쪽 - 4 사분면
+                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy + i == next_dy && now_dy + i <= 7))
+                    ; // 위로, 오른쪽 - 1 사분면
+                if ((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy - i == next_dy && now_dy - i >= 0))
+                    ; // 아래로, 왼쪽 - 3 사분면
+                if ((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy - i == next_dy && now_dy - i >= 0))
+                    ; // 위로, 왼쪽 - 2 사분면
+            }
+        }
+        // King
+        if (location.LocationPiece(now_dx, now_dy) == chess.BlackKing
+                && location.LocationPiece(now_dx, now_dy) == chess.WhiteKing) {
+            if (now_dx + 1 == next_dx && now_dx + 1 <= 7)
+                ; // -y 방향
+            if (now_dx - 1 == next_dx && now_dx - 1 >= 0)
+                ; // +y 방향
+            if (now_dy + 1 == next_dy && now_dy + 1 <= 7)
+                ; // -x 방향
+            if (now_dy - 1 == next_dy && now_dy - 1 >= 0)
+                ; // +x 방향
+            if ((now_dx + 1 == next_dx && now_dx + 1 <= 7) && (now_dy + 1 == next_dy && now_dy + 1 <= 7))
+                ; // 아래로, 오른쪽 - 4 사분면
+            if ((now_dx - 1 == next_dx && now_dx - 1 >= 0) && (now_dy + 1 == next_dy && now_dy + 1 <= 7))
+                ; // 위로, 오른쪽 - 1 사분면
+            if ((now_dx + 1 == next_dx && now_dx + 1 <= 7) && (now_dy - 1 == next_dy && now_dy - 1 >= 0))
+                ; // 아래로, 왼쪽 - 3 사분면
+            if ((now_dx - 1 == next_dx && now_dx - 1 >= 0) && (now_dy - 1 == next_dy && now_dy - 1 >= 0))
+                ; // 위로, 왼쪽 - 2 사분면
         }
     }
 
@@ -54,28 +197,23 @@ public class Black_Decision {
             Import_Board[i][j] = -6; // King
     }
 
-    public void Settling_Board(int i, int j){
-        if(location.LocationPiece(i, j) == chess.BlackPawn){
+    public void Settling_Board(int i, int j) {
+        if (location.LocationPiece(i, j) == chess.BlackPawn) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
-        }
-        else if(location.LocationPiece(i, j) == chess.BlackRook){
+        } else if (location.LocationPiece(i, j) == chess.BlackRook) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
-        }
-        else if(location.LocationPiece(i, j) == chess.BlackKnight){
+        } else if (location.LocationPiece(i, j) == chess.BlackKnight) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
-        }
-        else if(location.LocationPiece(i, j) == chess.BlackBishop){
+        } else if (location.LocationPiece(i, j) == chess.BlackBishop) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
-        }
-        else if(location.LocationPiece(i, j) == chess.BlackQueen){
+        } else if (location.LocationPiece(i, j) == chess.BlackQueen) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
-        }
-        else if(location.LocationPiece(i, j) == chess.BlackKing){
+        } else if (location.LocationPiece(i, j) == chess.BlackKing) {
             Settlexy[count][0] = i;
             Settlexy[count++][1] = j;
         }
