@@ -1,4 +1,5 @@
 package game.Piece;
+import game.UI.pieceMovingUI;
 import game.location.Location;
 
 public class PieceMoving {
