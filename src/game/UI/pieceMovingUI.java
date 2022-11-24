@@ -1,14 +1,15 @@
 package game.UI;
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
 import javax.lang.model.util.ElementScanner14;
 
 import game.Piece.PieceMoving;
 
 public class pieceMovingUI {
     int turn = 0;
+    int menu;
     BoardDrawing boardDrawing = new BoardDrawing();
     PieceMoving piecemoving = new PieceMoving();
     Scanner scanner = new Scanner(System.in);
@@ -33,6 +34,7 @@ public class pieceMovingUI {
                         StringTokenizer st_now = new StringTokenizer(br.readLine(), " ");
                         char white_now_x = st_now.nextToken().charAt(0);
                         char white_now_y = st_now.nextToken().charAt(0);
+                        System.out.println(white_now_x + " " + white_now_y);
                         System.out.println("말을 옮길 위치를 입력하세요");
                         System.out.print("> ");
                         StringTokenizer st_next = new StringTokenizer(br.readLine(), " ");
@@ -45,10 +47,6 @@ public class pieceMovingUI {
                     else if(BattleUI() == 2)
                     {
                         break;
-                    }
-                    else
-                    {
-                        DrawMovingUI(1);
                     }
                 }
                 else if(turn % 2 != 0)
@@ -75,10 +73,6 @@ public class pieceMovingUI {
                     {
                         break;
                     }
-                    else
-                    {
-                        DrawMovingUI(1);
-                    }
                 }
             }                  
         }
@@ -98,9 +92,23 @@ public class pieceMovingUI {
         System.out.println("1. 계속 하기");
         System.out.println("2. 기권 하기");
         System.out.println("=============================================");
-        System.out.print("> ");
-        int menu = scanner.nextInt();
+        //int형 아니면 나가리
+        try {
+            System.out.print("> ");
+            menu = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            scanner = new Scanner(System.in);
+            System.out.println("\n다시 입력해주세요\n");
+            BattleUI();
+        }
+        //정수 1, 2 아니면 나가리
+        if(menu < 1 || menu > 2)
+        {
+            scanner = new Scanner(System.in);
+            System.out.println("\n다시 입력해주세요\n");
+            BattleUI();
+        }
+
         return menu;
     }
-
 }
