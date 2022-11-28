@@ -4,10 +4,12 @@ import game.location.Location;
 
 public class RookPiece 
 {
+    check check = new check();
     Location location = new Location();
 
     public boolean WhiteRookMove(int now_x, int now_y, int next_x, int next_y) 
     {
+        String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
         int xDiff = now_x - next_x;
@@ -34,7 +36,12 @@ public class RookPiece
             }
 
             if(NextIsNull){
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("White") == "White"){
+                    chess.Swap(next_x, next_y, now_x, now_y, Piece);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else{
@@ -60,7 +67,12 @@ public class RookPiece
             }
 
             if(NextIsNull){
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("White") == "White"){
+                    chess.Swap(next_x, next_y, now_x, now_y, Piece);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else{
@@ -74,6 +86,7 @@ public class RookPiece
 
     public Boolean BlackRookMove(int now_x, int now_y, int next_x, int next_y)
     {
+        String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
         int xDiff = now_x - next_x;
@@ -100,7 +113,12 @@ public class RookPiece
             }
 
             if(NextIsNull){
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("Black") == "Black"){
+                    chess.Swap(next_x, next_y, now_x, now_y, Piece);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else{
@@ -126,7 +144,12 @@ public class RookPiece
             }
 
             if(NextIsNull){
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("Black") == "Black"){
+                    chess.Swap(next_x, next_y, now_x, now_y, Piece);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else{

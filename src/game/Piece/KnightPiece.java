@@ -4,10 +4,12 @@ import game.location.Location;
 
 public class KnightPiece 
 {
+    check check = new check();
     Location location = new Location();
 
     public boolean WhiteKnightMove(int now_x, int now_y, int next_x, int next_y) 
     {
+        String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         int xDiff = Math.abs(next_x - now_x);
         int yDiff = Math.abs(next_y - now_y);
@@ -28,7 +30,12 @@ public class KnightPiece
 
             if(NextIsNull)
             {
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("White") == "White"){
+                    chess.Swap(next_x, next_y, now_x, now_y, chess.WhiteKnight);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else
@@ -44,6 +51,7 @@ public class KnightPiece
 
     public Boolean BlackKnightMove(int now_x, int now_y, int next_x, int next_y)
     {
+        String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         int xDiff = Math.abs(next_x - now_x);
         int yDiff = Math.abs(next_y - now_y);
@@ -64,7 +72,12 @@ public class KnightPiece
 
             if(NextIsNull)
             {
-                game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                chess.Swap(now_x, now_y, next_x, next_y, Piece);
+                if(check.Check("Black") == "Black"){
+                    chess.Swap(next_x, next_y, now_x, now_y, Piece);
+                    chess.chessboard[next_y][next_x] = BeforePiece;
+                    return false;
+                }
                 return true;
             }
             else

@@ -9,6 +9,7 @@ public class PieceMoving {
     RookPiece rook = new RookPiece();
     QueenPiece queen = new QueenPiece();
     KnightPiece knight = new KnightPiece();
+    KingPiece king = new KingPiece();
 
     public Boolean PieceMove(char char_now_x, char char_now_y, char char_next_x, char char_next_y, String Color){
         int now_x = char_now_x >= 65 && char_now_x <= 72 ? char_now_x - 65 : char_now_x >= 97 && char_now_x <= 104 ? char_now_x - 97 : -1;
@@ -46,7 +47,9 @@ public class PieceMoving {
                     }
                 }
                 else if(nowPiece == game.UI.chess.WhiteKing){
-    
+                    if(king.WhiteKingMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
                 }
             }
             else if(Color == "Black"){
@@ -78,7 +81,9 @@ public class PieceMoving {
                     }
                 }
                 else if(nowPiece == game.UI.chess.BlackKing){
-    
+                    if(king.BlackKingMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
                 }
             }
         }
