@@ -51,7 +51,9 @@ public class PieceMoving {
             }
             else if(Color == "Black"){
                 if(nowPiece == game.UI.chess.BlackPawn){
-                    pawn.BlackPawnMove(now_x, now_y, next_x, next_y);
+                    if(pawn.BlackPawnMove(now_x, now_y, next_x, next_y)){
+                        return true;
+                    }
                 }
                 else if(nowPiece == game.UI.chess.BlackKnight){
                     if(knight.BlackKnightMove(now_x, now_y, next_x, next_y)){

@@ -8,7 +8,9 @@ public class PawnPiece{
 
     public boolean WhitePawnMove(int now_x, int now_y, int next_x, int next_y) {
         Boolean NextIsNull = true;
-        enpassant.Enpassant(now_x, now_y, next_x, next_y);
+        if(enpassant.Enpassant(now_x, now_y, next_x, next_y)){
+            return true;
+        }
         if(PawnCatch(now_x, now_y, next_x, next_y)){
             game.UI.chess.Swap(now_x, now_y, next_x, next_y, game.UI.chess.WhitePawn);
             promotion.Promotion(next_x, next_y, "White");
@@ -89,10 +91,10 @@ public class PawnPiece{
                     promotion.Promotion(next_x, next_y, "Black");
                 }
             }
-            return false;
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
 
@@ -101,14 +103,14 @@ public class PawnPiece{
 
         if(!location.LocationIsNull(next_x, next_y)){
             if(Color == "White"){
-                if(Math.abs(now_x - next_x) == 1){
+                if(Math.abs(now_x - next_x) == 1 && now_y - next_y == 1){
                     if(location.LocationColor(next_x, next_y) != Color){
                         return true;
                     }
                 }
             }
             else if(Color == "Black"){
-                if(Math.abs(now_x - next_x) == 1){
+                if(Math.abs(now_x - next_x) == 1 && next_y - now_y == 1){
                     if(location.LocationColor(next_x, next_y) != Color){
                         return true;
                     }

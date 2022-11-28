@@ -1,35 +1,56 @@
 package game.Piece;
-import decision_make.*;
 import game.UI.*;
 import game.location.*;
 
 public class check {
-    Decision_Making decision = new Decision_Making();
     Location location = new Location();
 
-    public boolean Check(int x, int y){
-        Boolean check = false;
+    static String Null = "N";
+    static String CanMove = "O";
+    static String CantMove = "X";
 
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                if(chess.chessboard[i][j] == chess.WhitePawn || chess.chessboard[i][j] == chess.BlackPawn){
-                    if(PawnCheck(i, j)){
-                        check = true;
+    static String[][] white_checkboard = // 화이트의 움직일 수 있는 경로
+    {
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null}
+    };
+    static String[][] black_checkboard = // 블랙의 움직일 수 있는 경로
+    {
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null},
+        {Null, Null, Null, Null, Null, Null, Null, Null}
+    };
+
+    public String Check(String Color){ // 체크 여부를 판단하는 메서드, Color = 움직일 말의 색깔
+        CheckBoard();
+        String check = "None"; // 체크가 된 색깔 -> 다음 턴에 잡힐 색깔
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                if(Color == "White"){ // 움직일 말의 색깔이 화이트라면
+                    if(chess.chessboard[y][x] == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
+                        check = "Black"; // 블랙이 체크가 됨
+                    }
+                    else if(chess.chessboard[y][x] == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 화이트가 놓은 말이 자충수라면
+                        check = "White"; // 화이트가 체크가 됨
                     }
                 }
-                else if(chess.chessboard[i][j] == chess.WhiteRook || chess.chessboard[i][j] == chess.BlackRook){
-                    if(RookCheck(i, j)){
-                        check = true;
+                else if(Color == "Black"){
+                    if(chess.chessboard[y][x] == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
+                        check = "White"; // 블랙이 체크가 됨
                     }
-                }
-                else if(chess.chessboard[i][j] == chess.WhiteBishop || chess.chessboard[i][j] == chess.BlackBishop){
-                    if(BishopCheck(i, j)){
-                        check = true;
-                    }
-                }
-                else if(chess.chessboard[i][j] == chess.WhiteQueen || chess.chessboard[i][j] == chess.WhiteQueen){
-                    if(QueenCheck(i, j)){
-                        check = true;
+                    else if(chess.chessboard[y][x] == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 블랙이 놓은 말이 자충수라면
+                        check = "Black"; // 화이트가 체크가 됨
                     }
                 }
             }
@@ -37,88 +58,113 @@ public class check {
         return check;
     }
 
-    public boolean PawnCheck(int x, int y){
-        if()
+    public void CheckBoard(){ // 모든 기물의 이동 경로를 파악해 2차원 배열에 저장하는 메서드
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                PawnCheck(x, y);
+                RookCheck(x, y);
+                KnightCheck(x, y);
+                BishopCheck(x, y);
+                QueenCheck(x, y);
+            }
+        }
+        PrintBoard();
     }
 
-    public boolean RookCheck(int x, int y){
-        int xDiff = 0;
-        int yDiff = 0;
-        String Piece = location.LocationPiece(x, y);
-        Boolean NextIsNull = true;
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 8; j++){
-                xDiff = x - i;
-                yDiff = 0;
-                if(xDiff == 0 && yDiff != 0){
+    public void PrintBoard(){
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                System.out.print(white_checkboard[y][x]);
+            }
+            System.out.println("");
+        }
+        System.out.println("================");
+        for(int y = 0; y < 8; y++){
+            for(int x = 0; x < 8; x++){
+                System.out.print(black_checkboard[y][x]);
+            }
+            System.out.println("");
+        }
+    }
 
-                    // 위로
-                    if(now_y > next_y){
-                        for(int i = 1; i <= now_y - next_y; i++){
-                            if(location.LocationColor(now_x, next_y + i) == "Black"){
-                                NextIsNull = false;
-                            }
-                        }
-                    }
-                    // 아래로
-                    else if(now_y < next_y){
-                        for(int i = 1; i <= next_y - now_y; i++){
-                            if(location.LocationColor(now_x, now_y + i) == "Black"){
-                                NextIsNull = false;
-                            }
-                        }
-                    }
-        
-                    if(NextIsNull){
-                        game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
+    public void PawnCheck(int x, int y){ // 잡을 수 있는 경로만 확인함
+        if(chess.chessboard[y][x] == chess.WhitePawn){
+            if(x - 1 >= 0 && y - 1 >= 0){
+                white_checkboard[y-1][x-1] = CanMove;
+            }
+            if(x + 1 <= 7 && y - 1 >= 0){
+                white_checkboard[y-1][x+1] = CanMove;
+            }
+        }
+        else if(chess.chessboard[y][x] == chess.BlackPawn){
+            if(x - 1 >= 0 && y + 1 <= 7){
+                black_checkboard[y+1][x-1] = CanMove;
+            }
+            if(x + 1 <= 7 && y + 1 <= 7){
+                black_checkboard[y+1][x+1] = CanMove;
+            }
+        }
+    }
+
+    public void RookCheck(int x, int y){
+        String Color = location.LocationColor(x, y);
+        if(chess.chessboard[y][x] == chess.WhiteRook || chess.chessboard[y][x] == chess.BlackRook){
+            for(int i = x + 1; i < 8; i++){ // 오른쪽으로
+                if(!location.LocationIsNull(x, y)){
+                    break;
                 }
-                else if(yDiff == 0){
-                    // 왼쪽으로
-                    if(now_x > next_x){
-                        for(int i = 1; i <= now_x - next_x; i++){
-                            if(location.LocationColor(next_x + i, now_y) == "Black"){
-                                NextIsNull = false;
-                            }
-                        }
-                    }
-                    // 오른쪽으로
-                    else if(now_x < next_x){
-                        for(int i = 1; i <= next_x - now_x; i++){
-                            if(location.LocationColor(now_x + i, now_y) == "Black"){
-                                NextIsNull = false;
-                            }
-                        }
-                    }
-        
-                    if(NextIsNull){
-                        game.UI.chess.Swap(now_x, now_y, next_x, next_y, Piece);
-                        return true;
-                    }
-                    else{
-                        return false;
-                    }
+                else if(Color == "White"){
+                    white_checkboard[y][x] = CanMove;
                 }
-                else{
-                    return false;
+                else if(Color == "Black"){
+                    black_checkboard[y][x] = CanMove;
+                }
+            }
+            for(int i = x - 1; i >= 0 ; i--){ // 왼쪽으로
+                if(!location.LocationIsNull(x, y)){
+                    break;
+                }
+                else if(Color == "White"){
+                    white_checkboard[y][x] = CanMove;
+                }
+                else if(Color == "Black"){
+                    black_checkboard[y][x] = CanMove;
+                }
+            }
+            for(int i = y - 1; i >= 0 ; i--){ // 위으로
+                if(!location.LocationIsNull(x, y)){
+                    break;
+                }
+                else if(Color == "White"){
+                    white_checkboard[y][x] = CanMove;
+                }
+                else if(Color == "Black"){
+                    black_checkboard[y][x] = CanMove;
+                }
+            }
+            for(int i = y + 1; i < 8 ; i++){ // 아래로
+                if(!location.LocationIsNull(x, y)){
+                    break;
+                }
+                else if(Color == "White"){
+                    white_checkboard[y][x] = CanMove;
+                }
+                else if(Color == "Black"){
+                    black_checkboard[y][x] = CanMove;
                 }
             }
         }
     }
 
-    public boolean KnightCheck(int x, int y){
+    public void KnightCheck(int x, int y){
 
     }
 
-    public boolean BishopCheck(int x, int y){
+    public void BishopCheck(int x, int y){
 
     }
 
-    public boolean QueenCheck(int x, int y){
+    public void QueenCheck(int x, int y){
 
     }
 }

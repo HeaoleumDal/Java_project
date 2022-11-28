@@ -12,7 +12,12 @@ public class KnightPiece
         int xDiff = Math.abs(next_x - now_x);
         int yDiff = Math.abs(next_y - now_y);
         Boolean NextIsNull = true;
-        Boolean canMove = (0 < xDiff && xDiff <= 2) && (0 < yDiff && yDiff <= 2) ? true : false;
+        boolean canMove = false;
+        if(xDiff + yDiff == 3){
+            if((xDiff == 2 && yDiff == 1) || (xDiff == 1 && yDiff == 2)){
+                canMove = true;
+            }
+        }
     
         //행마하기
         if(canMove)
@@ -43,13 +48,17 @@ public class KnightPiece
         int xDiff = Math.abs(next_x - now_x);
         int yDiff = Math.abs(next_y - now_y);
         Boolean NextIsNull = true;
-        Boolean canMove = (0 < xDiff && xDiff <= 2) && (0 < yDiff && yDiff <= 2) ? true : false;
+        boolean canMove = false;
+        if(xDiff + yDiff == 3){
+            if((xDiff == 2 && yDiff == 1) || (xDiff == 1 && yDiff == 2)){
+                canMove = true;
+            }
+        }
     
         //행마하기
         if(canMove)
         {
-            if(location.LocationColor(next_x, next_y) == "black")
-            {
+            if(location.LocationColor(next_x, next_y) == "Black"){
                 NextIsNull = false;
             }
 
