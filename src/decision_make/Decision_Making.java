@@ -7,28 +7,41 @@ public class Decision_Making {
     private int[] NPX;
     private int[] NPY;
     private int[][] Import_Board; // 말의 저장도가 저장되어 있는 보드
-    public int[][] Chess_Current_Board; //  탐색이 끝난 말의 중요도가 저장되어 있는 부드
+    public int[][] Chess_Current_Board; //  탐색이 끝난 말의 중요도가 저장되어 있는 보드
     Location location = new Location();
+
+    public boolean checkEnemy(int x, int y, int color){ // Black = 0, White = 1
+      if(color == 0){
+        for(int i=0;i<6;i++){
+          if(location.LocationPiece(x,y) == chess.WhitePiece[i]) return true;
+        }
+      }
+      else if(color == 1){
+        for(int i=0;i<6;i++){
+          if(location.LocationPiece(x,y) == chess.BlackPiece[i]) return true;
+        }
+      }
+    }
 
     public boolean CanMove(int now_dx, int now_dy, int next_dx, int next_dy, String[][] Board){
 
         if((next_dx >= 0 || next_dx <= 7) && (next_dy >= 0 || next_dy <= 7)){
             // Pawn Move
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackPawn){
+            if(location.LocationPiece(now_dx,now_dy) == chess.BlackPawn && (checkEnemy(next_dx, next_dy,0) == true)){
                 if((now_dy - 1 == next_dy)){
                     return true;
                 }
                 else if((now_dy - 2 == next_dy && now_dy == 1)) return true;
             }
-            if(location.LocationPiece(now_dx,now_dy) == chess.WhitePawn){
+            if(location.LocationPiece(now_dx,now_dy) == chess.WhitePawn && (checkEnemy(next_dx, next_dy,1) == true)){
                 if((now_dy - 1 == next_dy)){
                     return true;
                 }
                 else if((now_dy - 2 == next_dy && now_dy == 6)) return true;
             }
-    
+
             // Rook Move
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackRook || location.LocationPiece(now_dx,now_dy) == chess.WhiteRook){
+            if((location.LocationPiece(now_dx,now_dy) == chess.BlackRook && checkEnemy(next_dx, next_dy,0) == true) || (location.LocationPiece(now_dx,now_dy) == chess.WhiteRook && checkEnemy(next_dx, next_dy,1) == true)){
                 for(int i=1;i<=7;i++){
                     if(now_dx + i == next_dx && now_dx + i <= 7) return true;
                     if(now_dx - i == next_dx && now_dx - i >= 0) return true;
@@ -37,7 +50,7 @@ public class Decision_Making {
                 }
             }
             // Knight Move
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackKnight || location.LocationPiece(now_dx,now_dy) == chess.WhiteKnight){
+            if((location.LocationPiece(now_dx,now_dy) == chess.BlackKnight && checkEnemy(next_dx, next_dy,0) == true) || (location.LocationPiece(now_dx,now_dy) == chess.WhiteKnight && checkEnemy(next_dx, next_dy,1) == true)){
                 if(now_dx - 2 == next_dx && now_dy - 1 == next_dy) return true;
                 if(now_dx - 2 == next_dx && now_dy + 1 == next_dy) return true;
                 if(now_dx - 1 == next_dx && now_dy - 2 == next_dy) return true;
@@ -48,7 +61,7 @@ public class Decision_Making {
                 if(now_dx + 2 == next_dx && now_dy + 1 == next_dy) return true;
             }
             // Bishop Move
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackBishop || location.LocationPiece(now_dx,now_dy) == chess.WhiteBishop){
+            if((location.LocationPiece(now_dx,now_dy) == chess.BlackBishop && checkEnemy(next_dx, next_dy,0) == true) || (location.LocationPiece(now_dx,now_dy) == chess.WhiteBishop && checkEnemy(next_dx, next_dy,1) == true)){
                 for(int i=1;i<=7;i++){
                     if((now_dx + i == next_dx && now_dx + i <= 7) && (now_dy + i == next_dy && now_dy + i <= 7)) return true; // 아래로, 오른쪽 - 4 사분면
                     if((now_dx - i == next_dx && now_dx - i >= 0) && (now_dy + i == next_dy && now_dy + i <= 7)) return true; // 위로, 오른쪽 - 1 사분면
@@ -57,7 +70,7 @@ public class Decision_Making {
                 }
             }
             // Queen
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackQueen || location.LocationPiece(now_dx,now_dy) == chess.WhiteQueen){
+            if((location.LocationPiece(now_dx,now_dy) == chess.BlackQueen && checkEnemy(next_dx, next_dy,0) == true) || (location.LocationPiece(now_dx,now_dy) == chess.WhiteQueen && checkEnemy(next_dx, next_dy,1) == true)){
                 for(int i=1;i<=7;i++){
                     if(now_dx + i == next_dx && now_dx + i <= 7) return true; // -y 방향
                     if(now_dx - i == next_dx && now_dx - i >= 0) return true; // +y 방향
@@ -70,7 +83,7 @@ public class Decision_Making {
                 }
             }
             //King
-            if(location.LocationPiece(now_dx,now_dy) == chess.BlackKing && location.LocationPiece(now_dx,now_dy) == chess.WhiteKing){
+            if((location.LocationPiece(now_dx,now_dy) == chess.BlackKing && checkEnemy(next_dx, next_dy,0) == true) || (location.LocationPiece(now_dx,now_dy) == chess.WhiteKing && checkEnemy(next_dx, next_dy,1) == true)){
                 if(now_dx + 1 == next_dx && now_dx + 1 <= 7) return true; // -y 방향
                 if(now_dx - 1 == next_dx && now_dx - 1 >= 0) return true; // +y 방향
                 if(now_dy + 1 == next_dy && now_dy + 1 <= 7) return true; // -x 방향
@@ -84,40 +97,4 @@ public class Decision_Making {
         }
         else return false;
     }
-    //location.NowLocationPiece() // 현재위치
-    //location.NextLocationPiece() // 나중위치
-    // public void clear(){
-    //     Import_Board = new int[8][8];
-    //     Current_Piece_Import = new int[8];
-    //     Chess_Current_Board = new int[8][8];
-    //     NPX = new int[20];
-    //     NPY = new int[20];
-    // }
-
-    // public void Each_Search(){
-
-    // }
-
-    // public void All_Each_Search(){
-    //     int max = 0;
-    //     for(int i = 0;i<8;i++){
-    //         Each_Search();
-    //         //if(max < )
-    //     }
-    // }
-
-    // public int Each_Search(int cX, int cY){ // 이걸 for문으로 여러번 반복
-    //     int important = 0;
-    //     // 탐색 진행
-    //     return important;
-    // }
-
-    // public void All_Search(){
-    //     int max = 0;
-    //     for(int i = 0; i< 8;i++){
-    //         for(int j = 0; j< 8;j++){
-    //             //if()
-    //         }
-    //     }
-    // }
 }
