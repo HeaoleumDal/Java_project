@@ -16,7 +16,7 @@ public class PawnPiece{
         if(PawnCatch(now_x, now_y, next_x, next_y)){
             chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
             if(check.Check("White") == "White"){
-                chess.Swap(next_x, next_y, now_x, now_y, chess.WhiteKing);
+                chess.Swap(next_x, next_y, now_x, now_y, chess.WhitePawn);
                 chess.chessboard[next_y][next_x] = BeforePiece;
                 return false;
             }
@@ -55,6 +55,11 @@ public class PawnPiece{
             else{
                 if(now_y - next_y < 2 && now_y - next_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
+                    if(check.Check("White") == "White"){
+                        chess.Swap(next_x, next_y, now_x, now_y, chess.WhitePawn);
+                        chess.chessboard[next_y][next_x] = BeforePiece;
+                        return false;
+                    }
                     promotion.Promotion(next_x, next_y, "White");
                 }
             }
@@ -68,14 +73,16 @@ public class PawnPiece{
     public Boolean BlackPawnMove(int now_x, int now_y, int next_x, int next_y){
         String BeforePiece = location.LocationPiece(next_x, next_y);
         Boolean NextIsNull = true;
-        enpassant.Enpassant(now_x, now_y, next_x, next_y);
+        if(enpassant.Enpassant(now_x, now_y, next_x, next_y)){
+            return true;
+        }
         if(PawnCatch(now_x, now_y, next_x, next_y)){
-            if(check.Check("Black") == "Black"){
+            chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+            if(check.Check("BlacBlack") == "Black"){
                 chess.Swap(next_x, next_y, now_x, now_y, chess.BlackPawn);
                 chess.chessboard[next_y][next_x] = BeforePiece;
                 return false;
             }
-            chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
             promotion.Promotion(next_x, next_y, "Black");
             return true;
         }
@@ -95,6 +102,11 @@ public class PawnPiece{
             if(now_y == 1){
                 if(next_y - now_y < 3 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+                    if(check.Check("Black") == "Black"){
+                        chess.Swap(next_x, next_y, now_x, now_y, chess.BlackPawn);
+                        chess.chessboard[next_y][next_x] = BeforePiece;
+                        return false;
+                    }
                     if(Math.abs(now_y - next_y) == 2){
                         enpassant.black_before_x = now_x;
                         enpassant.black_before_y = now_y;
@@ -106,6 +118,11 @@ public class PawnPiece{
             else{
                 if(next_y - now_y < 2 && next_y - now_y > 0 && location.LocationIsNull(next_x, next_y)){
                     chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+                    if(check.Check("Black") == "Black"){
+                        chess.Swap(next_x, next_y, now_x, now_y, chess.BlackPawn);
+                        chess.chessboard[next_y][next_x] = BeforePiece;
+                        return false;
+                    }
                     promotion.Promotion(next_x, next_y, "Black");
                 }
             }

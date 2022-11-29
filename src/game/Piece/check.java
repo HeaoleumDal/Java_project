@@ -37,18 +37,18 @@ public class check {
         for(int y = 0; y < 8; y++){
             for(int x = 0; x < 8; x++){
                 if(Color == "White"){ // 움직일 말의 색깔이 화이트라면
-                    if(chess.chessboard[y][x] == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
+                    if(location.LocationPiece(x, y) == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
                         check = "Black"; // 블랙이 체크가 됨
                     }
-                    else if(chess.chessboard[y][x] == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 화이트가 놓은 말이 자충수라면
+                    else if(location.LocationPiece(x, y) == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 화이트가 놓은 말이 자충수라면
                         check = "White"; // 화이트가 체크가 됨
                     }
                 }
                 else if(Color == "Black"){
-                    if(chess.chessboard[y][x] == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
+                    if(location.LocationPiece(x, y) == chess.WhiteKing && black_checkboard[y][x] == CanMove){ // 상대 말을 잡을 수 있다면
                         check = "White"; // 블랙이 체크가 됨
                     }
-                    else if(chess.chessboard[y][x] == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 블랙이 놓은 말이 자충수라면
+                    else if(location.LocationPiece(x, y) == chess.BlackKing && white_checkboard[y][x] == CanMove){ // 블랙이 놓은 말이 자충수라면
                         check = "Black"; // 화이트가 체크가 됨
                     }
                 }
@@ -64,7 +64,6 @@ public class check {
         ClearBoard();
         for(int y = 0; y < 8; y++){
             for(int x = 0; x < 8; x++){
-                System.out.println(x + " " + y);
                 PawnCheck(x, y);
                 RookCheck(x, y);
                 KnightCheck(x, y);
@@ -72,10 +71,9 @@ public class check {
                 QueenCheck(x, y);
             }
         }
-        PrintBoard();
     }
 
-    private void ClearBoard(){
+    public void ClearBoard(){
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 white_checkboard[j][i] = Null;
@@ -84,56 +82,36 @@ public class check {
         }
     }
 
-    public void PrintBoard(){
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                System.out.print(white_checkboard[y][x] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("================");
-        for(int y = 0; y < 8; y++){
-            for(int x = 0; x < 8; x++){
-                System.out.print(black_checkboard[y][x] + " ");
-            }
-            System.out.println("");
-        }
-    }
-
-    private void PawnCheck(int x, int y){ // 잡을 수 있는 경로만 확인함
-        if(chess.chessboard[y][x] == chess.WhitePawn){
+    public void PawnCheck(int x, int y){ // 잡을 수 있는 경로만 확인함
+        if(location.LocationPiece(x, y) == chess.WhitePawn){
             if(x - 1 >= 0 && y - 1 >= 0){
                 if(location.LocationColor(x - 1, y - 1) != "White"){
                     white_checkboard[y-1][x-1] = CanMove;
-                    System.out.println("White Pawn");
                 }
             }
             if(x + 1 <= 7 && y - 1 >= 0){
                 if(location.LocationColor(x + 1, y - 1) != "White"){
                     white_checkboard[y-1][x+1] = CanMove;
-                    System.out.println("White Pawn");
                 }
             }
         }
-        else if(chess.chessboard[y][x] == chess.BlackPawn){
+        else if(location.LocationPiece(x, y) == chess.BlackPawn){
             if(x - 1 >= 0 && y + 1 <= 7){
                 if(location.LocationColor(x - 1, y + 1) != "Black"){
                     black_checkboard[y+1][x-1] = CanMove;
-                    System.out.println("Black Pawn");
                 }
             }
             if(x + 1 <= 7 && y + 1 <= 7){
                 if(location.LocationColor(x + 1, y + 1) != "Black"){
                     black_checkboard[y+1][x+1] = CanMove;
-                    System.out.println("Black Pawn");
                 }
             }
         }
     }
 
-    private void RookCheck(int x, int y){
+    public void RookCheck(int x, int y){
         String Color = location.LocationColor(x, y);
-        if(chess.chessboard[y][x] == chess.WhiteRook || chess.chessboard[y][x] == chess.BlackRook){
+        if(location.LocationPiece(x, y) == chess.WhiteRook || location.LocationPiece(x, y) == chess.BlackRook){
             for(int i = x + 1; i < 8; i++){ // 오른쪽으로
                 if(!location.LocationIsNull(i, y)){
                     if(location.LocationColor(i, y) != Color){
@@ -146,13 +124,11 @@ public class check {
                     }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(i, y) && Color == "White"){
                     white_checkboard[y][i] = CanMove;
-                    System.out.println("White Rook");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(i, y) && Color == "Black"){
                     black_checkboard[y][i] = CanMove;
-                    System.out.println("Black Rook");
                 }
             }
             for(int i = x - 1; i >= 0 ; i--){ // 왼쪽으로
@@ -167,13 +143,11 @@ public class check {
                     }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(i, y) && Color == "White"){
                     white_checkboard[y][i] = CanMove;
-                    System.out.println("White Rook");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(i, y) && Color == "Black"){
                     black_checkboard[y][i] = CanMove;
-                    System.out.println("Black Rook");
                 }
             }
             for(int i = y - 1; i >= 0 ; i--){ // 위로
@@ -188,13 +162,11 @@ public class check {
                     }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(x, i) && Color == "White"){
                     white_checkboard[i][x] = CanMove;
-                    System.out.println("White Rook");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(x, i) && Color == "Black"){
                     black_checkboard[i][x] = CanMove;
-                    System.out.println("Black Rook");
                 }
             }
             for(int i = y + 1; i < 8 ; i++){ // 아래로
@@ -209,134 +181,114 @@ public class check {
                     }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(x, i) && Color == "White"){
                     white_checkboard[i][x] = CanMove;
-                    System.out.println("White Rook");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(x, i) && Color == "Black"){
                     black_checkboard[i][x] = CanMove;
-                    System.out.println("Black Rook");
                 }
             }
         }
     }
 
-    private void KnightCheck(int x, int y){
+    public void KnightCheck(int x, int y){
         String Color = location.LocationColor(x, y);
-        if(chess.chessboard[y][x] == chess.WhiteKnight || chess.chessboard[y][x] == chess.BlackKnight){
+        if(location.LocationPiece(x, y) == chess.WhiteKnight || location.LocationPiece(x, y) == chess.BlackKnight){
             if(x + 1 < 8 && y - 2 >= 0){ // 1시 방향 이동
                 if(location.LocationColor(x + 1, y - 2) != Color && Color == "White"){
                     white_checkboard[y - 2][x + 1] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x + 1, y - 2) != Color && Color == "Black"){
                     black_checkboard[y - 2][x + 1] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x + 2 < 8 && y - 1 >= 0){ // 2시 방향 이동
                 if(location.LocationColor(x + 2, y - 1) != Color && Color == "White"){
                     white_checkboard[y - 1][x + 2] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x + 2, y - 1) != Color && Color == "Black"){
                     black_checkboard[y - 1][x + 2] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x + 2 < 8 && y + 1 < 8){ // 4시 방향 이동
                 if(location.LocationColor(x + 2, y + 1) != Color && Color == "White"){
                     white_checkboard[y + 1][x + 2] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x + 2, y + 1) != Color && Color == "Black"){
                     black_checkboard[y + 1][x + 2] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x + 1 < 8 && y + 2 < 8){ // 5시 방향 이동
                 if(location.LocationColor(x + 1, y + 2) != Color && Color == "White"){
                     white_checkboard[y + 2][x + 1] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x + 1, y + 2) != Color && Color == "Black"){
                     black_checkboard[y + 2][x + 1] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x - 1 >= 0 && y + 2 < 8){ // 7시 방향 이동
                 if(location.LocationColor(x - 1, y + 2) != Color && Color == "White"){
                     white_checkboard[y + 2][x - 1] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x - 1, y + 2) != Color && Color == "Black"){
                     black_checkboard[y + 2][x - 1] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x - 2 >= 0 && y + 1 < 8){ // 8시 방향 이동
                 if(location.LocationColor(x - 2, y + 1) != Color && Color == "White"){
                     white_checkboard[y + 1][x - 2] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x - 2, y + 1) != Color && Color == "Black"){
                     black_checkboard[y + 1][x - 2] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x - 2 >= 0 && y - 1 >= 0){ // 10시 방향 이동
                 if(location.LocationColor(x - 2, y - 1) != Color && Color == "White"){
                     white_checkboard[y - 1][x - 2] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x - 2, y - 1) != Color && Color == "Black"){
                     black_checkboard[y - 1][x - 2] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
             if(x - 1 >= 0 && y - 2 >= 0){ // 10시 방향 이동
                 if(location.LocationColor(x - 1, y - 2) != Color && Color == "White"){
                     white_checkboard[y - 2][x - 1] = CanMove;
-                    System.out.println("White Knight");
                 }
                 else if(location.LocationColor(x - 1, y - 2) != Color && Color == "Black"){
                     black_checkboard[y - 2][x - 1] = CanMove;
-                    System.out.println("Black Knight");
                 }
             }
         }
     }
 
-    private void BishopCheck(int x, int y){
+    public void BishopCheck(int x, int y){
         String Color = location.LocationColor(x, y);
-        if(chess.chessboard[y][x] == chess.WhiteBishop || chess.chessboard[y][x] == chess.BlackBishop){
-            for(int i = 0; i < 8; i++){
-                if(x + i < 8 && y - i >= 0){ // 오른쪽 위
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y - i][x + i] = CanMove;
-                            System.out.println("White Bishop");
+        int xDiff = 8 - x;
+        int yDiff = 8 - y;
+        if(location.LocationPiece(x, y) == chess.WhiteBishop || location.LocationPiece(x, y) == chess.BlackBishop){
+            // 오른쪽 위 x + i, y - i
+            if(xDiff >= y){
+                for(int i = 1; i < 8; i++){
+                    if(y - i >= 0){
+                        if(location.LocationIsNull(x + i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y - i][x + i] = CanMove;
-                            System.out.println("Black Bishop");
+                        else if(location.LocationColor(x + i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
+                            break;
                         }
-                    }
-                    else{
-                        break;
-                    }
-                }
-            }
-            for(int i = 0; i < 8; i++){
-                if(x + i < 8 && y + i < 8){ // 오른쪽 아래
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y + i][x + i] = CanMove;
-                            System.out.println("White Bishop");
-                        }
-                        else if(Color == "Black"){
-                            black_checkboard[y + i][x + i] = CanMove;
-                            System.out.println("Black Bishop");
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -344,16 +296,28 @@ public class check {
                     }
                 }
             }
-            for(int i = 0; i < 8; i++){
-                if(x - i >= 0 && y + i < 8){ // 왼쪽 아래
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y + i][x - i] = CanMove;
-                            System.out.println("White Bishop");
+            else if(xDiff < y){
+                for(int i = 1; i < 8; i++){
+                    if(x + i < 8){
+                        if(location.LocationIsNull(x + i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y + i][x - i] = CanMove;
-                            System.out.println("Black Bishop");
+                        else if(location.LocationColor(x + i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -361,16 +325,176 @@ public class check {
                     }
                 }
             }
-            for(int i = 0; i < 8; i++){
-                if(x - i < 8 && y - i >= 0){ // 오른쪽 위
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y - i][x - i] = CanMove;
-                            System.out.println("White Bishop");
+            // 오른쪽 아래 x + i, y + i
+            if(xDiff >= yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(y + i < 8){
+                        if(location.LocationIsNull(x + i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y - i][x - i] = CanMove;
-                            System.out.println("Black Bishop");
+                        else if(location.LocationColor(x + i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(xDiff < yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(x + i < 8){
+                        if(location.LocationIsNull(x + i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x + i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            // 왼쪽 아래 x - i, y + i
+            if(x >= yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(y + i < 8){
+                        if(location.LocationIsNull(x - i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(x < yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(x - i >= 0){
+                        if(location.LocationIsNull(x - i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            // 왼쪽 위 x - i, y - i
+            if(x >= y){
+                for(int i = 1; i < 8; i++){
+                    if(y - i >= 0){
+                        if(location.LocationIsNull(x - i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(x < y){
+                for(int i = 1; i < 8; i++){
+                    if(x - i >= 0){
+                        if(location.LocationIsNull(x - i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -381,71 +505,110 @@ public class check {
         }
     }
 
-    private void QueenCheck(int x, int y){
+    public void QueenCheck(int x, int y){
         String Color = location.LocationColor(x, y);
-        if(chess.chessboard[y][x] == chess.WhiteQueen || chess.chessboard[y][x] == chess.BlackQueen){
+        int xDiff = 8 - x;
+        int yDiff = 8 - y;
+        if(location.LocationPiece(x, y) == chess.WhiteQueen || location.LocationPiece(x, y) == chess.BlackQueen){
             for(int i = x + 1; i < 8; i++){ // 오른쪽으로
                 if(!location.LocationIsNull(i, y)){
+                    if(location.LocationColor(i, y) != Color){
+                        if(Color == "White"){
+                            white_checkboard[y][i] = CanMove;
+                        }
+                        else if(Color == "Black"){
+                            black_checkboard[y][i] = CanMove;
+                        }
+                    }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(i, y) && Color == "White"){
                     white_checkboard[y][i] = CanMove;
-                    System.out.println("White Queen");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(i, y) && Color == "Black"){
                     black_checkboard[y][i] = CanMove;
-                    System.out.println("Black Queen");
                 }
             }
             for(int i = x - 1; i >= 0 ; i--){ // 왼쪽으로
                 if(!location.LocationIsNull(i, y)){
+                    if(location.LocationColor(i, y) != Color){
+                        if(Color == "White"){
+                            white_checkboard[y][i] = CanMove;
+                        }
+                        else if(Color == "Black"){
+                            black_checkboard[y][i] = CanMove;
+                        }
+                    }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(i, y) && Color == "White"){
                     white_checkboard[y][i] = CanMove;
-                    System.out.println("White Queen");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(i, y) && Color == "Black"){
                     black_checkboard[y][i] = CanMove;
-                    System.out.println("Black Queen");
                 }
             }
             for(int i = y - 1; i >= 0 ; i--){ // 위로
                 if(!location.LocationIsNull(x, i)){
+                    if(location.LocationColor(x, i) != Color){
+                        if(Color == "White"){
+                            white_checkboard[i][x] = CanMove;
+                        }
+                        else if(Color == "Black"){
+                            black_checkboard[i][x] = CanMove;
+                        }
+                    }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(x, i) && Color == "White"){
                     white_checkboard[i][x] = CanMove;
-                    System.out.println("White Queen");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(x, i) && Color == "Black"){
                     black_checkboard[i][x] = CanMove;
-                    System.out.println("Black Queen");
                 }
             }
             for(int i = y + 1; i < 8 ; i++){ // 아래로
                 if(!location.LocationIsNull(x, i)){
+                    if(location.LocationColor(x, i) != Color){
+                        if(Color == "White"){
+                            white_checkboard[i][x] = CanMove;
+                        }
+                        else if(Color == "Black"){
+                            black_checkboard[i][x] = CanMove;
+                        }
+                    }
                     break;
                 }
-                else if(Color == "White"){
+                else if(location.LocationIsNull(x, i) && Color == "White"){
                     white_checkboard[i][x] = CanMove;
-                    System.out.println("White Queen");
                 }
-                else if(Color == "Black"){
+                else if(location.LocationIsNull(x, i) && Color == "Black"){
                     black_checkboard[i][x] = CanMove;
-                    System.out.println("Black Queen");
                 }
             }
-            for(int i = 0; i < 8; i++){
-                if(x + i < 8 && y - i >= 0){ // 오른쪽 위
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y - i][x + i] = CanMove;
-                            System.out.println("White Queen");
+            // 오른쪽 위 x + i, y - i
+            if(xDiff >= y){
+                for(int i = 1; i < 8; i++){
+                    if(y - i >= 0){
+                        if(location.LocationIsNull(x + i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y - i][x + i] = CanMove;
-                            System.out.println("Black Queen");
+                        else if(location.LocationColor(x + i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -453,33 +616,28 @@ public class check {
                     }
                 }
             }
-            for(int i = 0; i < 8; i++){
-                if(x + i < 8 && y + i < 8){ // 오른쪽 아래
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y + i][x + i] = CanMove;
-                            System.out.println("White Queen");
+            else if(xDiff < y){
+                for(int i = 1; i < 8; i++){
+                    if(x + i < 8){
+                        if(location.LocationIsNull(x + i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y + i][x + i] = CanMove;
-                            System.out.println("Black Queen");
+                        else if(location.LocationColor(x + i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x + i] = CanMove;
+                            }
+                            break;
                         }
-                    }
-                    else{
-                        break;
-                    }
-                }
-            }
-            for(int i = 0; i < 8; i++){
-                if(x - i >= 0 && y + i < 8){ // 왼쪽 아래
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y + i][x - i] = CanMove;
-                            System.out.println("White Queen");
-                        }
-                        else if(Color == "Black"){
-                            black_checkboard[y + i][x - i] = CanMove;
-                            System.out.println("Black Queen");
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -487,16 +645,176 @@ public class check {
                     }
                 }
             }
-            for(int i = 0; i < 8; i++){
-                if(x - i < 8 && y - i >= 0){ // 오른쪽 위
-                    if(location.LocationIsNull(x, y)){
-                        if(Color == "White"){
-                            white_checkboard[y - i][x - i] = CanMove;
-                            System.out.println("White Queen");
+            // 오른쪽 아래 x + i, y + i
+            if(xDiff >= yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(y + i < 8){
+                        if(location.LocationIsNull(x + i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
                         }
-                        else if(Color == "Black"){
-                            black_checkboard[y - i][x - i] = CanMove;
-                            System.out.println("Black Queen");
+                        else if(location.LocationColor(x + i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(xDiff < yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(x + i < 8){
+                        if(location.LocationIsNull(x + i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x + i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x + i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x + i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            // 왼쪽 아래 x - i, y + i
+            if(x >= yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(y + i < 8){
+                        if(location.LocationIsNull(x - i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(x < yDiff){
+                for(int i = 1; i < 8; i++){
+                    if(x - i >= 0){
+                        if(location.LocationIsNull(x - i, y + i)){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y + i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y + i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y + i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            // 왼쪽 위 x - i, y - i
+            if(x >= y){
+                for(int i = 1; i < 8; i++){
+                    if(y - i >= 0){
+                        if(location.LocationIsNull(x - i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else if(x < y){
+                for(int i = 1; i < 8; i++){
+                    if(x - i >= 0){
+                        if(location.LocationIsNull(x - i, y - i)){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                        }
+                        else if(location.LocationColor(x - i, y - i) != Color){
+                            if(Color == "White"){
+                                white_checkboard[y - i][x - i] = CanMove;
+                            }
+                            else if(Color == "Black"){
+                                black_checkboard[y - i][x - i] = CanMove;
+                            }
+                            break;
+                        }
+                        else{
+                            break;
                         }
                     }
                     else{
@@ -507,3 +825,4 @@ public class check {
         }
     }
 }
+

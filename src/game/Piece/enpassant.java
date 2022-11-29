@@ -11,7 +11,7 @@ public class enpassant {
         if(location.LocationColor(now_x, now_y) == "White"){
             if(Math.abs(black_now_x - now_x) == 1 && black_now_y == now_y){
                 if(black_now_y != 0){
-                    if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
+                    if(Math.abs(now_x - next_x) == 1 && now_y - next_y == 1){
                         chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
                         chess.chessboard[black_now_y][black_now_x] = chess.nullPiece;
                         return true;
@@ -22,7 +22,7 @@ public class enpassant {
         else if(location.LocationColor(now_x, now_y) == "Black"){
             if(Math.abs(white_now_x - now_x) == 1 && white_now_y == now_y){
                 if(white_now_y != 0){
-                    if(Math.abs(now_x - next_x) == 1 && Math.abs(now_y - next_y) == 1){
+                    if(Math.abs(now_x - next_x) == 1 && next_y - now_x == 1){
                         chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
                         chess.chessboard[white_now_y][white_now_x] = chess.nullPiece;
                         return true;
