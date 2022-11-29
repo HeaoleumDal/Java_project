@@ -5,7 +5,7 @@ import game.location.Location;
 import decision_make.Decision_Making;
 
 public class Black_Decision {
-    private int[][] Import_Board;
+    private int[][] Import_Board = new int[8][8];
     private int[][] Settlexy = new int[20][2];
     private int Each_Max; // 각 말들이 가질 수 있는 최대값
     private int max; // 각 팀에서 가질 수 있는 최대값
@@ -14,20 +14,30 @@ public class Black_Decision {
     public int count = 0;
     Location location = new Location();
 
-    public void BlackImporting_Board(String[][] CI_Board) {
-        count = 0;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Importing_Board(i, j, CI_Board);
-                Settling_Board(i, j);
-            }
-        }
-        for (int i = 0; i < 20; i++) {
-
-        }
-
+    public void Main_Black_Move(){ // 실제로 호출되는 함수는 이 함수 뿐임
+      clear();
+      BlackImporting_Board(chess.chessboard);
     }
 
+    public void clear(){
+      Black_Decision Import_Board = new int[8][8];
+      Black_Decision Settlexy = new int[20][2];
+      Each_Max = 0;
+      max = 0, max_x =0, max_y = 0, max_next_x = 0, max_next_y = 0, count = 0;
+    }
+
+    public void BlackImporting_Board(String[][] CI_Board) {
+        count = 0;
+        for (int i = 0; i < 8; i++) { // 의사 결정을 위한 기본적인 세팅
+            for (int j = 0; j < 8; j++) {
+                Importing_Board(i, j, CI_Board); // Update된 자신의 보드에 중요도 부여
+                Settling_Board(i, j); // 각 말의 위치를 가져옴
+            }
+        }
+        for (int i = 0; i < 20; i++) { // 각 말이 갖는 중요도의 최댓값을 저장해줌
+          Check_Import(Settlexy[i][0], Settlexy[i][1]);
+        }
+    }
     public void SwapMax(int x, int y, int m_x, int m_y) {
         max = Import_Board[x + m_x][y + m_y];
         max_x = x;
