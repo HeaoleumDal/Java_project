@@ -11,16 +11,17 @@ public class Decision_Making {
     Location location = new Location();
 
     public boolean checkEnemy(int x, int y, int color){ // Black = 0, White = 1
-      if(color == 0){
-        for(int i=0;i<6;i++){
-          if(location.LocationPiece(x,y) == chess.WhitePiece[i]) return true;
+        if(color == 0){
+            for(int i=0;i<6;i++){
+                if(location.LocationPiece(x,y) == chess.WhitePiece[i]) return true;
+            }
         }
-      }
-      else if(color == 1){
-        for(int i=0;i<6;i++){
-          if(location.LocationPiece(x,y) == chess.BlackPiece[i]) return true;
+        else if(color == 1){
+            for(int i=0;i<6;i++){
+                if(location.LocationPiece(x,y) == chess.BlackPiece[i]) return true;
+            }
         }
-      }
+        return false;
     }
 
     public boolean CanMove(int now_dx, int now_dy, int next_dx, int next_dy, String[][] Board){

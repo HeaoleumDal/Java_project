@@ -20,10 +20,15 @@ public class Black_Decision {
     }
 
     public void clear(){
-      Black_Decision Import_Board = new int[8][8];
-      Black_Decision Settlexy = new int[20][2];
+      Import_Board = new int[8][8];
+      Settlexy = new int[20][2];
       Each_Max = 0;
-      max = 0, max_x =0, max_y = 0, max_next_x = 0, max_next_y = 0, count = 0;
+      max = 0;
+      max_x = 0;
+      max_y = 0;
+      max_next_x = 0;
+      max_next_y = 0;
+      count = 0;
     }
 
     public void BlackImporting_Board(String[][] CI_Board) {
