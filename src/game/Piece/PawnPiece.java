@@ -50,6 +50,7 @@ public class PawnPiece{
                         enpassant.white_now_x = next_x;
                         enpassant.white_now_y = next_y;
                     }
+                    return true;
                 }
             }
             else{
@@ -61,9 +62,10 @@ public class PawnPiece{
                         return false;
                     }
                     promotion.Promotion(next_x, next_y, "White");
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
         else{
             return false;
@@ -113,6 +115,7 @@ public class PawnPiece{
                         enpassant.black_now_x = next_x;
                         enpassant.black_now_y = next_y;
                     }
+                    return true;
                 }
             }
             else{
@@ -124,9 +127,10 @@ public class PawnPiece{
                         return false;
                     }
                     promotion.Promotion(next_x, next_y, "Black");
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
         else{
             return false;

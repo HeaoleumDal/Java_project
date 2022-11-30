@@ -6,24 +6,21 @@ public class RookPiece
 {
     check check = new check();
     Location location = new Location();
-    Boolean firstMove = true;
 
     public boolean WhiteRookMove(int now_x, int now_y, int next_x, int next_y) 
     {
         String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
-        firstMove = false;
         int xDiff = now_x - next_x;
         int yDiff = now_y - next_y;
     
         //행마하기
         if(xDiff == 0 && yDiff != 0){
-            firstMove = false;
             // 위로
             if(now_y > next_y){
                 for(int i = 1; i <= now_y - next_y; i++){
-                    if(location.LocationColor(now_x, next_y + i) == "White"){
+                    if(location.LocationColor(now_x, now_y - i) == "White"){
                         NextIsNull = false;
                     }
                 }
@@ -54,7 +51,7 @@ public class RookPiece
             // 왼쪽으로
             if(now_x > next_x){
                 for(int i = 1; i <= now_x - next_x; i++){
-                    if(location.LocationColor(next_x + i, now_y) == "White"){
+                    if(location.LocationColor(now_x - i, now_y) == "White"){
                         NextIsNull = false;
                     }
                 }
@@ -91,17 +88,15 @@ public class RookPiece
         String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
-        firstMove = false;
         int xDiff = now_x - next_x;
         int yDiff = now_y - next_y;
     
         //행마하기
         if(xDiff == 0 && yDiff != 0){
-
             // 위로
             if(now_y > next_y){
                 for(int i = 1; i <= now_y - next_y; i++){
-                    if(location.LocationColor(now_x, next_y + i) == "Black"){
+                    if(location.LocationColor(now_x, now_y - i) == "Black"){
                         NextIsNull = false;
                     }
                 }
@@ -132,7 +127,7 @@ public class RookPiece
             // 왼쪽으로
             if(now_x > next_x){
                 for(int i = 1; i <= now_x - next_x; i++){
-                    if(location.LocationColor(next_x + i, now_y) == "Black"){
+                    if(location.LocationColor(now_x - i, now_y) == "Black"){
                         NextIsNull = false;
                     }
                 }
