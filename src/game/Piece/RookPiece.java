@@ -6,18 +6,20 @@ public class RookPiece
 {
     check check = new check();
     Location location = new Location();
+    Boolean firstMove = true;
 
     public boolean WhiteRookMove(int now_x, int now_y, int next_x, int next_y) 
     {
         String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
+        firstMove = false;
         int xDiff = now_x - next_x;
         int yDiff = now_y - next_y;
     
         //행마하기
         if(xDiff == 0 && yDiff != 0){
-
+            firstMove = false;
             // 위로
             if(now_y > next_y){
                 for(int i = 1; i <= now_y - next_y; i++){
@@ -89,6 +91,7 @@ public class RookPiece
         String BeforePiece = location.LocationPiece(next_x, next_y);
         String Piece = location.LocationPiece(now_x, now_y);
         Boolean NextIsNull = true;
+        firstMove = false;
         int xDiff = now_x - next_x;
         int yDiff = now_y - next_y;
     
