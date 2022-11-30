@@ -14,19 +14,19 @@ public class mate {
 
     public void Checkmate(String Color){
         String[][] to_King = reverseKing(Color);
-
+        // printBoard(to_King);
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 if(!location.LocationIsNull(j, i)){
                     if(Color == "White"){
-                        if(check.black_checkboard[j][i] != check.CanMove && to_King[j][i] == toKing){
+                        if(check.black_checkboard[j][i] != check.CanMove && check.black_moveboard[j][i] != check.CanMove && to_King[j][i] == toKing){
                             System.out.print("\nBlack Win");
                             board.DrawChessBoard();
                             System.exit(0);
                         }
                     }
                     else if(Color == "Black"){
-                        if(check.white_checkboard[j][i] != check.CanMove && to_King[j][i] == toKing){
+                        if(check.white_checkboard[j][i] != check.CanMove && check.white_moveboard[j][i] != check.CanMove && to_King[j][i] == toKing){
                             System.out.print("\nWhite Win");
                             board.DrawChessBoard();
                             System.exit(0);
@@ -37,8 +37,41 @@ public class mate {
         }
     }
 
-    public void Stalemate(int x, int y){
-
+    public void printBoard(String[][] to_King){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                System.out.print(to_King[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("====================");
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                System.out.print(check.white_checkboard[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("====================");
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                System.out.print(check.white_moveboard[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("====================");
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                System.out.print(check.black_checkboard[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("====================");
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                System.out.print(check.black_moveboard[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     /**

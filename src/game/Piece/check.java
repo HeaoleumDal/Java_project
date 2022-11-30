@@ -1028,9 +1028,11 @@ public class check {
                 if(location.LocationColor(x + 1, y) != Color){
                     if(Color == "White"){
                         white_moveboard[y][x + 1] = CanMove;
+                        white_checkboard[y][x + 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y][x + 1] = CanMove;
+                        black_checkboard[y][x + 1] = CanMove;
                     }
                 }
             }
@@ -1038,9 +1040,11 @@ public class check {
                 if(location.LocationColor(x - 1, y) != Color){
                     if(Color == "White"){
                         white_moveboard[y][x - 1] = CanMove;
+                        white_checkboard[y][x - 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y][x - 1] = CanMove;
+                        black_checkboard[y][x - 1] = CanMove;
                     }
                 }
             }
@@ -1048,9 +1052,11 @@ public class check {
                 if(location.LocationColor(x, y - 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y - 1][x] = CanMove;
+                        white_checkboard[y - 1][x] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y - 1][x] = CanMove;
+                        black_checkboard[y - 1][x] = CanMove;
                     }
                 }
             }
@@ -1058,9 +1064,11 @@ public class check {
                 if(location.LocationColor(x, y + 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y + 1][x] = CanMove;
+                        white_checkboard[y + 1][x] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y + 1][x] = CanMove;
+                        black_checkboard[y + 1][x] = CanMove;
                     }
                 }
             }
@@ -1068,9 +1076,11 @@ public class check {
                 if(location.LocationColor(x + 1, y - 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y - 1][x + 1] = CanMove;
+                        white_checkboard[y - 1][x + 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y - 1][x + 1] = CanMove;
+                        black_checkboard[y - 1][x + 1] = CanMove;
                     }
                 }
             }
@@ -1078,9 +1088,11 @@ public class check {
                 if(location.LocationColor(x + 1, y + 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y + 1][x + 1] = CanMove;
+                        white_checkboard[y + 1][x + 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y + 1][x + 1] = CanMove;
+                        black_checkboard[y + 1][x + 1] = CanMove;
                     }
                 }
             }
@@ -1088,9 +1100,11 @@ public class check {
                 if(location.LocationColor(x - 1, y - 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y - 1][x - 1] = CanMove;
+                        white_checkboard[y - 1][x - 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y - 1][x - 1] = CanMove;
+                        black_checkboard[y - 1][x - 1] = CanMove;
                     }
                 }
             }
@@ -1098,9 +1112,11 @@ public class check {
                 if(location.LocationColor(x - 1, y + 1) != Color){
                     if(Color == "White"){
                         white_moveboard[y + 1][x - 1] = CanMove;
+                        white_checkboard[y + 1][x - 1] = CanMove;
                     }
                     else if(Color == "Black"){
                         black_moveboard[y + 1][x - 1] = CanMove;
+                        black_checkboard[y + 1][x - 1] = CanMove;
                     }
                 }
             }
