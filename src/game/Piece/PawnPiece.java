@@ -6,11 +6,20 @@ public class PawnPiece{
     check check = new check();
     Location location = new Location();
     promotion promotion = new promotion();
+    mate checkmate = new mate();
 
     public boolean WhitePawnMove(int now_x, int now_y, int next_x, int next_y) {
         String BeforePiece = location.LocationPiece(next_x, next_y);
         Boolean NextIsNull = true;
         if(enpassant.Enpassant(now_x, now_y, next_x, next_y)){
+            chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
+            if(check.Check("White") == "White"){
+                chess.Swap(next_x, next_y, now_x, now_y, chess.WhitePawn);
+                chess.chessboard[next_y][next_x] = BeforePiece;
+                return false;
+            }
+            chess.chessboard[next_y+1][next_x] = chess.nullPiece;
+            checkmate.Checkmate("Black");
             return true;
         }
         if(PawnCatch(now_x, now_y, next_x, next_y)){
@@ -21,6 +30,7 @@ public class PawnPiece{
                 return false;
             }
             promotion.Promotion(next_x, next_y, "White");
+            checkmate.Checkmate("Black");
             return true;
         }
         if(now_x != next_x){
@@ -50,6 +60,7 @@ public class PawnPiece{
                         enpassant.white_now_x = next_x;
                         enpassant.white_now_y = next_y;
                     }
+                    checkmate.Checkmate("Black");
                     return true;
                 }
             }
@@ -62,6 +73,7 @@ public class PawnPiece{
                         return false;
                     }
                     promotion.Promotion(next_x, next_y, "White");
+                    checkmate.Checkmate("Black");
                     return true;
                 }
             }
@@ -76,16 +88,25 @@ public class PawnPiece{
         String BeforePiece = location.LocationPiece(next_x, next_y);
         Boolean NextIsNull = true;
         if(enpassant.Enpassant(now_x, now_y, next_x, next_y)){
+            chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
+            if(check.Check("Black") == "Black"){
+                chess.Swap(next_x, next_y, now_x, now_y, chess.BlackPawn);
+                chess.chessboard[next_y][next_x] = BeforePiece;
+                return false;
+            }
+            chess.chessboard[next_y-1][next_x] = chess.nullPiece;
+            checkmate.Checkmate("White");
             return true;
         }
         if(PawnCatch(now_x, now_y, next_x, next_y)){
             chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
-            if(check.Check("BlacBlack") == "Black"){
+            if(check.Check("Black") == "Black"){
                 chess.Swap(next_x, next_y, now_x, now_y, chess.BlackPawn);
                 chess.chessboard[next_y][next_x] = BeforePiece;
                 return false;
             }
             promotion.Promotion(next_x, next_y, "Black");
+            checkmate.Checkmate("White");
             return true;
         }
         if(now_x != next_x){
@@ -115,6 +136,7 @@ public class PawnPiece{
                         enpassant.black_now_x = next_x;
                         enpassant.black_now_y = next_y;
                     }
+                    checkmate.Checkmate("White");
                     return true;
                 }
             }
@@ -127,6 +149,7 @@ public class PawnPiece{
                         return false;
                     }
                     promotion.Promotion(next_x, next_y, "Black");
+                    checkmate.Checkmate("White");
                     return true;
                 }
             }

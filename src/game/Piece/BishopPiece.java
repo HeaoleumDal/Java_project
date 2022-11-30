@@ -3,6 +3,7 @@ import game.UI.chess;
 import game.location.Location;
 public class BishopPiece{
     check check = new check();
+    mate checkmate = new mate();
     Location location = new Location();
 
     public boolean WhiteBishopMove(int now_x, int now_y, int next_x, int next_y) 
@@ -54,6 +55,7 @@ public class BishopPiece{
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("White");
                 return true;
             }
             else{
@@ -114,6 +116,7 @@ public class BishopPiece{
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("White");
                 return true;
             }
             else{

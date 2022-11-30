@@ -32,4 +32,22 @@ public class Location {
         }
         return Color;
     }
+
+    /**
+     * 
+     * @param Piece 좌표 값을 알고 싶은 기물
+     * @return 기물의 좌표값 [x, y]
+     */
+    public int[] PiecePosition(String Piece){
+        int[] position = new int[2];
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(LocationPiece(j, i) == Piece){
+                    position[0] = j;
+                    position[1] = i;
+                }
+            }
+        }
+        return position;
+    }
 }

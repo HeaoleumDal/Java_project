@@ -1,6 +1,5 @@
 package game.Piece;
 import game.location.*;
-import game.UI.chess;
 
 public class enpassant {
     static Location location = new Location();
@@ -9,35 +8,31 @@ public class enpassant {
 
     public static boolean Enpassant(int now_x, int now_y, int next_x, int next_y){
         if(location.LocationColor(now_x, now_y) == "White"){
-            if(Math.abs(black_now_x - now_x) == 1 && black_now_y == now_y){
+            if(Math.abs(black_now_x - now_x) == 1 && black_now_y == now_y && black_now_x == next_x){
                 if(black_now_y != 0){
                     if(Math.abs(now_x - next_x) == 1 && now_y - next_y == 1){
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.WhitePawn);
-                        chess.chessboard[black_now_y][black_now_x] = chess.nullPiece;
+                        black_before_x = 0;
+                        black_before_y = 0;
+                        black_now_x = 0;
+                        black_now_y = 0;
                         return true;
                     }
                 }
             }
         }
         else if(location.LocationColor(now_x, now_y) == "Black"){
-            if(Math.abs(white_now_x - now_x) == 1 && white_now_y == now_y){
+            if(Math.abs(white_now_x - now_x) == 1 && white_now_y == now_y && white_now_x == next_x){
                 if(white_now_y != 0){
-                    if(Math.abs(now_x - next_x) == 1 && next_y - now_x == 1){
-                        chess.Swap(now_x, now_y, next_x, next_y, chess.BlackPawn);
-                        chess.chessboard[white_now_y][white_now_x] = chess.nullPiece;
+                    if(Math.abs(now_x - next_x) == 1 && next_y - now_y == 1){
+                        white_before_x = 0;
+                        white_before_y = 0;
+                        white_now_x = 0;
+                        white_now_y = 0;
                         return true;
                     }
                 }
             }
         }
-        white_before_x = 0;
-        white_before_y = 0;
-        white_now_x = 0;
-        white_now_y = 0;
-        black_before_x = 0;
-        black_before_y = 0;
-        black_now_x = 0;
-        black_now_y = 0;
         return false;
     }
 }

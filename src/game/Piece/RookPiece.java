@@ -6,6 +6,7 @@ public class RookPiece
 {
     check check = new check();
     Location location = new Location();
+    mate checkmate = new mate();
 
     public boolean WhiteRookMove(int now_x, int now_y, int next_x, int next_y) 
     {
@@ -41,6 +42,7 @@ public class RookPiece
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("Black");
                 return true;
             }
             else{
@@ -72,6 +74,7 @@ public class RookPiece
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("Black");
                 return true;
             }
             else{
@@ -117,6 +120,7 @@ public class RookPiece
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("White");
                 return true;
             }
             else{
@@ -148,6 +152,7 @@ public class RookPiece
                     chess.chessboard[next_y][next_x] = BeforePiece;
                     return false;
                 }
+                checkmate.Checkmate("White");
                 return true;
             }
             else{

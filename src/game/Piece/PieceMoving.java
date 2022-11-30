@@ -11,6 +11,7 @@ public class PieceMoving {
     KnightPiece knight = new KnightPiece();
     KingPiece king = new KingPiece();
     castling castling = new castling();
+    mate checkmate = new mate();
 
     public Boolean PieceMove(char char_now_x, char char_now_y, char char_next_x, char char_next_y, String Color){
         int now_x = char_now_x >= 65 && char_now_x <= 72 ? char_now_x - 65 : char_now_x >= 97 && char_now_x <= 104 ? char_now_x - 97 : -1;
