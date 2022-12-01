@@ -17,15 +17,19 @@ public class promotion{
                 Piece = sc.nextLine();
                 if(Piece.equals("Rook") || Piece.equals("rook")) {
                     game.UI.chess.chessboard[y][x] = game.UI.chess.WhiteRook;
+                    ErrorPiece = false;
                 }
                 else if(Piece.equals("Knight") || Piece.equals("knight")) {
                     game.UI.chess.chessboard[y][x] = game.UI.chess.WhiteKnight;
+                    ErrorPiece = false;
                 }
                 else if(Piece.equals("Bishop") || Piece.equals("bishop")) {
                     game.UI.chess.chessboard[y][x] = game.UI.chess.WhiteBishop;
+                    ErrorPiece = false;
                 }
                 else if(Piece.equals("Queen") || Piece.equals("queen")) {
                     game.UI.chess.chessboard[y][x] = game.UI.chess.WhiteQueen;
+                    ErrorPiece = false;
                 }
                 else {
                     ErrorPiece = true;

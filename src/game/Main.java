@@ -10,14 +10,7 @@ public class Main {
         try {
             pieceMovingUI.DrawMovingUI(mode);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
-        //System.out.println(mode);
-        //chess.Print();
-
-
-
-
     }
 }
